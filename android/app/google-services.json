@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "702288552178",
+    "firebase_url": "https://collage-classroom.firebaseio.com",
+    "project_id": "collage-classroom",
+    "storage_bucket": "collage-classroom.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:702288552178:android:93110979cc13cc33a8f06b",
+        "android_client_info": {
+          "package_name": "com.nikunj.collage_classroom"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "702288552178-2a2n30sfi9omjghou1mfs7eas8n5ubmd.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyC5JEj3rcLZZM8eM7uMkCjOi0Vhl7_ao5Q"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "702288552178-2a2n30sfi9omjghou1mfs7eas8n5ubmd.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
