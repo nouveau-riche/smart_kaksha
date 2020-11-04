@@ -1,6 +1,13 @@
+import 'package:collage_classroom/utility/database.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
-class HomePage extends StatelessWidget {
+import '../utility/google_signin.dart';
+import './home_page.dart';
+
+
+class Authentication extends StatelessWidget {
+
   @override
   Widget build(BuildContext context) {
     final mq = MediaQuery.of(context).size;
@@ -9,7 +16,7 @@ class HomePage extends StatelessWidget {
       body: Column(
         children: [
           Container(
-            height: mq.height * 0.4,
+            height: mq.height * 0.36,
             child: Image.asset("assets/images/logo.jpg"),
           ),
           Container(
@@ -35,7 +42,7 @@ class HomePage extends StatelessWidget {
                 ],
               )),
           Container(
-            height: mq.height * 0.1,
+            height: mq.height * 0.12,
             child: Center(
               child: Column(
                 mainAxisSize: MainAxisSize.min,
@@ -66,7 +73,11 @@ class HomePage extends StatelessWidget {
                 style: const TextStyle(
                     color: const Color.fromRGBO(25, 128, 58, 1), fontSize: 17),
               ),
-              onPressed: () {},
+              onPressed: () {
+                signInWithGoogle(context).whenComplete((){
+                  print('done successfully');
+                });
+              },
               color: Colors.white,
             ),
           ),

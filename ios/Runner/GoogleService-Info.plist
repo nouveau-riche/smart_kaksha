@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>CLIENT_ID</key>
+	<string>702288552178-8n2ao191aobg1f1et19fbibkl999t4km.apps.googleusercontent.com</string>
+	<key>REVERSED_CLIENT_ID</key>
+	<string>com.googleusercontent.apps.702288552178-8n2ao191aobg1f1et19fbibkl999t4km</string>
+	<key>ANDROID_CLIENT_ID</key>
+	<string>702288552178-nrmb02g9e0j7gu0ukdu9dn4f8b39np5e.apps.googleusercontent.com</string>
+	<key>API_KEY</key>
+	<string>AIzaSyAoGilBOqd6PPny40MA1nIuJofj4lMCKZ0</string>
+	<key>GCM_SENDER_ID</key>
+	<string>702288552178</string>
+	<key>PLIST_VERSION</key>
+	<string>1</string>
+	<key>BUNDLE_ID</key>
+	<string>com.nikunj.collageClassroom</string>
+	<key>PROJECT_ID</key>
+	<string>collage-classroom</string>
+	<key>STORAGE_BUCKET</key>
+	<string>collage-classroom.appspot.com</string>
+	<key>IS_ADS_ENABLED</key>
+	<false></false>
+	<key>IS_ANALYTICS_ENABLED</key>
+	<false></false>
+	<key>IS_APPINVITE_ENABLED</key>
+	<true></true>
+	<key>IS_GCM_ENABLED</key>
+	<true></true>
+	<key>IS_SIGNIN_ENABLED</key>
+	<true></true>
+	<key>GOOGLE_APP_ID</key>
+	<string>1:702288552178:ios:41d2f7ce6d86e5d6a8f06b</string>
+	<key>DATABASE_URL</key>
+	<string>https://collage-classroom.firebaseio.com</string>
+</dict>
+</plist>
