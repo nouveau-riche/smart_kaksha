@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import './create_class.dart';
+import './join_class.dart';
 
 Future<Widget> buildBottomSheet(BuildContext context) async {
   final mq = MediaQuery.of(context).size;
@@ -17,7 +18,7 @@ Future<Widget> buildBottomSheet(BuildContext context) async {
                     style: const TextStyle(fontSize: 18),
                   ),
                   onPressed: () {
-
+                    buildJoinClass(context);
                   },
                 ),
                 FlatButton(

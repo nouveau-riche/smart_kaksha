@@ -27,6 +27,7 @@ Future<Widget> buildCreateClass(BuildContext context) async {
                       icon: Icon(Icons.clear),
                       onPressed: () {
                         Navigator.of(context).pop();
+                        Navigator.of(context).pop();
                       },
                     ),
                     Text(
@@ -49,7 +50,12 @@ Future<Widget> buildCreateClass(BuildContext context) async {
                                   _className.text,
                                   _secName.text,
                                   _subjectName.text,
-                                  user.displayName);
+                                  user.displayName,
+                                  true);
+                              Navigator.of(context).pop();
+                              _className.clear();
+                              _secName.clear();
+                              _subjectName.clear();
                             },
                     )
                   ],

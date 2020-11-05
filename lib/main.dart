@@ -19,8 +19,8 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      //home: FirebaseAuth.instance.currentUser != null ? HomePage() : Authentication(),
-      home: HomePage(),
+      home: FirebaseAuth.instance.currentUser != null ? HomePage() : Authentication(),
+      //home: HomePage(),
       debugShowCheckedModeBanner: false,
       routes: {
         './authentication_screen': (ctx) => Authentication(),
