@@ -10,10 +10,11 @@ bool isClassCodeValid = false;
 Future<Widget> buildJoinClass(BuildContext context) async {
   final mq = MediaQuery.of(context).size;
   return await showModalBottomSheet(
+    isScrollControlled: true,
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(18)),
       context: context,
       builder: (ctx) => Container(
-            height: mq.height,
+            height: mq.height*0.8,
             child: Column(
               children: [
                 Row(
@@ -39,17 +40,22 @@ Future<Widget> buildJoinClass(BuildContext context) async {
                           ? null
                           : () async {
                               User user = FirebaseAuth.instance.currentUser;
-                              
-                              DocumentSnapshot snapshot = await FirebaseFirestore.instance.collection('singleClass').doc(_codeController.text).get();
-                              
-                              //saveClassOnFirebase(user.uid, snapshot.data()['name'], snapshot.data()['section'], snapshot.data()['subject'], snapshot.data()['instructor'], false);
-                                joinClassOnFirebase(_codeController.text, snapshot.data()['name'], snapshot.data()['section'], snapshot.data()['subject'], user.uid);
 
-//                              joinClassOnFirebase(_codeController.text,
-//                                  user.uid, user.displayName);
-                              //_codeController.clear();
+                              DocumentSnapshot snapshot =
+                                  await FirebaseFirestore.instance
+                                      .collection('singleClass')
+                                      .doc(_codeController.text)
+                                      .get();
+                              joinClassOnFirebase(
+                                  _codeController.text,
+                                  snapshot.data()['name'],
+                                  snapshot.data()['section'],
+                                  snapshot.data()['subject'],
+                                  user.uid,
+                                  user.displayName,
+                                  user.photoURL);
+                              _codeController.clear();
                             },
-
                     )
                   ],
                 ),
@@ -86,7 +92,7 @@ Widget buildClassCodeField(double width) {
       ),
       controller: _codeController,
       onChanged: (_value) {
-        if(_value.length > 5){
+        if (_value.length > 5) {
           isClassCodeValid = true;
         }
       },

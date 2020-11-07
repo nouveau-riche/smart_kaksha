@@ -1,3 +1,4 @@
+import 'dart:io';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 
@@ -19,7 +20,7 @@ Future<Map<String, dynamic>> fetchUserDetails(String uid) async {
 }
 
 void saveClassOnFirebase(String uid, String name, String section,
-    String subject, String instructor,bool isInst) {
+    String subject, String instructor, bool isInst) {
   final ref1 = _firestoreInst
       .collection('classesCreated')
       .doc(uid)
@@ -43,12 +44,13 @@ void saveClassOnFirebase(String uid, String name, String section,
     'section': section,
     'subject': subject,
     'instructor': instructor,
-    'isInstructor': true
+    'isInstructor': true,
+    'studentJoined': []
   });
 }
 
-void joinClassOnFirebase(
-    String classId, String name,String section,String subject,String studentUID) {
+void joinClassOnFirebase(String classId, String name, String section,
+    String subject, String studentUID, String studentName, String imageUrl) {
   final ref = _firestoreInst
       .collection('classesCreated')
       .doc(studentUID)
@@ -60,8 +62,26 @@ void joinClassOnFirebase(
     'name': name,
     'section': section,
     'subject': subject,
-    //'student_name': studentName,
     'isInstructor': false
+  });
+
+  final ref1 =
+      FirebaseFirestore.instance.collection('singleClass').doc(classId);
+  ref1.update({
+    'studentJoined': FieldValue.arrayUnion([
+      {'studentName': studentName, 'studentImageUrl': imageUrl}
+    ])
+  });
+}
+
+void updateAssignmentInClass(String classId,String url,String studentName,bool isInstructor) {
+  final ref = FirebaseFirestore.instance.collection('singleClass').doc(classId);
+  ref.update({
+    'assignments': FieldValue.arrayUnion([{
+      'url': url,
+      'name': studentName,
+      'isInstructor': isInstructor
+    }])
   });
 }
 
@@ -72,4 +92,12 @@ void fetchClasses(String uid) async {
       .collection('allClasses');
   QuerySnapshot snapshot =
       await ref.orderBy('timestamp', descending: true).get();
+}
+
+Future<String> uploadAssignmentOnFirebaseStorage(String uid, File file) async {
+  final ref = _firebaseStrorage.ref().child(uid);
+  StorageUploadTask storageUploadTask = ref.child(uid).putFile(file);
+  StorageTaskSnapshot storageTaskSnapshot = await storageUploadTask.onComplete;
+  String downloadUrl = await storageTaskSnapshot.ref.getDownloadURL();
+  return downloadUrl;
 }

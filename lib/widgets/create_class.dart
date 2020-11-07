@@ -14,10 +14,11 @@ bool isSectionNameValid = false;
 Future<Widget> buildCreateClass(BuildContext context) async {
   final mq = MediaQuery.of(context).size;
   return await showModalBottomSheet(
+      isScrollControlled: true,
       context: context,
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(18)),
       builder: (ctx) => Container(
-            height: mq.height,
+            height: mq.height*0.8,
             child: Column(
               children: [
                 Row(

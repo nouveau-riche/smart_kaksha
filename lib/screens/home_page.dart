@@ -14,8 +14,6 @@ class HomePage extends StatefulWidget {
 }
 
 String imageUrl;
-//String imageUrl =
-//    "https://lh4.googleusercontent.com/-IAYOn4aVGjM/AAAAAAAAAAI/AAAAAAAAAAA/AMZuucnDTKGYwe3laVoPNnFr22Mrb0QoJw/s96-c/photo.jpg";
 
 class _HomePageState extends State<HomePage> {
   @override
@@ -34,11 +32,12 @@ class _HomePageState extends State<HomePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        //backgroundColor: Colors.white,
+        backgroundColor: Colors.white,
         elevation: 0,
+        iconTheme: IconThemeData(color: Colors.black),
         title: Text(
           'Collage Classroom',
-          style: TextStyle(color: Colors.black),
+          style: TextStyle(color: Colors.black54),
         ),
         centerTitle: true,
         actions: [
@@ -60,7 +59,7 @@ class _HomePageState extends State<HomePage> {
         ],
       ),
       drawer: Drawer(
-        child: buildDrawerContent(),
+        child: buildDrawerContent(context),
       ),
       body: stream(),
       floatingActionButton: FloatingActionButton(
@@ -78,7 +77,6 @@ class _HomePageState extends State<HomePage> {
         stream: FirebaseFirestore.instance
             .collection('classesCreated')
             .doc(user.uid)
-            //.doc('b9GI7GgwhrdPLwDFe9AKvOPstFE2')
             .collection('allClasses')
             .snapshots(),
         builder: (context, snapshot) {
@@ -87,6 +85,7 @@ class _HomePageState extends State<HomePage> {
             List<DisplayClass> classes = [];
             _data.docs.map((doc) {
               classes.add( DisplayClass(
+                classId: doc['class_id'],
                 className: doc['name'],
                 section: doc['section'],
                 isInstructor: doc['isInstructor'],
@@ -96,7 +95,6 @@ class _HomePageState extends State<HomePage> {
               itemBuilder: (ctx, index) => classes[index],
               itemCount: classes.length,
             );
-            //return Text('finding bug');
           } else {
             return Text('No active Clasees');
           }

@@ -1,28 +1,150 @@
+import 'package:collage_classroom/widgets/assign_assignment_to_class.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
-class ClassDetail extends StatelessWidget {
+import '../widgets/display_class.dart';
+import '../widgets/drawer.dart';
+
+class ClassDetail extends StatefulWidget {
+  final String classId;
   final String className;
+  final String section;
   final bool isInstructor;
-  ClassDetail(this.className,this.isInstructor);
+
+  ClassDetail(this.classId, this.className, this.section, this.isInstructor);
+
+  @override
+  _ClassDetailState createState() => _ClassDetailState();
+}
+
+class _ClassDetailState extends State<ClassDetail> {
+  int index = 0;
 
   @override
   Widget build(BuildContext context) {
+    final mq = MediaQuery.of(context).size;
     return Scaffold(
-      appBar: AppBar(actions: [
-
-        isInstructor ? IconButton(
-          icon: Icon(Icons.settings),
-          onPressed: (){},
-        ) : IconButton(
-          icon: Icon(Icons.description),
-          onPressed: (){},
-        ),
-      ],),
-        body: Column(children: [
-          Container(
-            child: Text(className),
+      appBar: AppBar(
+        elevation: 0,
+        backgroundColor: Colors.white,
+        iconTheme: const IconThemeData(color: Colors.black),
+        actions: [
+          widget.isInstructor
+              ? IconButton(
+                  icon: Icon(
+                    Icons.settings,
+                    color: Colors.black54,
+                  ),
+                  onPressed: () {},
+                )
+              : IconButton(
+                  icon: Icon(
+                    Icons.description,
+                    color: Colors.black54,
+                  ),
+                  onPressed: () {},
+                ),
+        ],
+      ),
+      drawer: Drawer(
+        child: buildDrawerContent(context),
+      ),
+      body: Column(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: [
+          Column(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              buildClass(mq.height * 0.16, mq.width, widget.className,
+                  widget.section, widget.isInstructor),
+              buildShareSomething(context, mq.height * 0.08)
+            ],
           ),
-        ],),
+          buildBottomNavigationBar(mq.height * 0.1, mq.width * 0.5),
+        ],
+      ),
+    );
+  }
+
+  buildBottomNavigationBar(double height, double width) {
+    return Container(
+      height: height,
+      decoration: BoxDecoration(
+          color: Colors.grey,
+          borderRadius: BorderRadius.only(
+              topLeft: Radius.circular(10), topRight: Radius.circular(10))),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+        children: [
+          Container(
+            width: width,
+            child: IconButton(
+              splashColor: Colors.transparent,
+              icon: Icon(
+                Icons.assignment,
+                color: index == 0 ? Colors.black : Colors.white,
+              ),
+              onPressed: () {
+                setState(() {
+                  index = 0;
+                });
+              },
+            ),
+          ),
+          Container(
+            width: width,
+            child: IconButton(
+              splashColor: Colors.transparent,
+              icon: Icon(Icons.people,
+                  color: index == 1 ? Colors.black : Colors.white),
+              onPressed: () {
+                setState(() {
+                  index = 1;
+                });
+              },
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+
+  Widget buildShareSomething(BuildContext context, double height) {
+    User user = FirebaseAuth.instance.currentUser;
+    return InkWell(
+      onTap: () {
+        buildAssignAssignment(
+            context: context,
+            uid: user.uid,
+            classId: widget.classId,
+            studentName: user.displayName,
+            isInstructor: widget.isInstructor
+        );
+      },
+      child: Card(
+        elevation: 8,
+        margin: EdgeInsets.symmetric(horizontal: 6, vertical: 5),
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(14),
+        ),
+        child: Container(
+          padding: EdgeInsets.all(10),
+          height: height,
+          decoration: BoxDecoration(
+            borderRadius: BorderRadius.circular(12),
+          ),
+          child: Row(
+            children: [
+              CircleAvatar(
+                radius: 20,
+                backgroundImage: NetworkImage(user.photoURL),
+              ),
+              SizedBox(width: 10),
+              Text('Share Something with your class...'),
+            ],
+          ),
+        ),
+      ),
     );
   }
 }
