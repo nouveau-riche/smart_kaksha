@@ -48,7 +48,7 @@ class ClassStreamScreen extends StatelessWidget{
       body: Column(
         mainAxisSize: MainAxisSize.min,
         children: [
-          buildClass(mq.height * 0.16, mq.width, className,
+          buildClass(context,mq.height * 0.16, mq.width, classId,className,
               section, isInstructor),
           buildShareSomething(context, mq.height * 0.08),
           buildAssignmentStream(),

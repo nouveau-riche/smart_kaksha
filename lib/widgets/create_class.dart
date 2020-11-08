@@ -64,7 +64,7 @@ Widget buildAppBar(BuildContext context) {
                 ? null
                 : () {
                     User user = FirebaseAuth.instance.currentUser;
-                    saveClassOnFirebase(
+                    createClassOnFirebase(
                         user.uid,
                         _className.text,
                         _secName.text,

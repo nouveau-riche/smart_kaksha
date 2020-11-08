@@ -12,7 +12,7 @@ void saveUserInfoToFirestore(
   ref.set({'id': uid, 'name': name, 'email': email, 'imageURL': imageURL});
 }
 
-void saveClassOnFirebase(String uid, String name, String section,
+void createClassOnFirebase(String uid, String name, String section,
     String subject, String instructor, String instructorPhotoUrl, bool isInst) {
   final ref1 = _firestoreInst
       .collection('classesCreated')
@@ -75,6 +75,11 @@ void joinClassOnFirebase(
       {'studentName': studentName, 'studentImageUrl': imageUrl}
     ])
   });
+}
+
+void unEnrolFromJoinedClass(String uid,String classId){
+  final ref = _firestoreInst.collection('classesCreated').doc(uid).collection('allClasses').doc(classId);
+  ref.delete();
 }
 
 void updateAssignmentInClass(String uid, String classId, String assignmentName,

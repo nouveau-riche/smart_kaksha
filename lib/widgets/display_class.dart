@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import '../screens/class_detail.dart';
+import '../widgets/unenrol_joined_class.dart';
 
 class DisplayClass extends StatelessWidget {
   final String classId;
@@ -18,12 +19,12 @@ class DisplayClass extends StatelessWidget {
           Navigator.of(context).push(MaterialPageRoute(
               builder: (ctx) => ClassDetail(classId,className, section, isInstructor)));
         },
-        child: buildClass(mq.height * 0.16, mq.width, className, section,isInstructor));
+        child: buildClass(context,mq.height * 0.16, mq.width, classId,className, section,isInstructor));
   }
 }
 
-Widget buildClass(
-    double height, double width, String className, String section,bool isInstructor) {
+Widget buildClass(BuildContext context,
+    double height, double width, String classId, String className, String section,bool isInstructor) {
   return Card(
     elevation: 5,
     margin: const EdgeInsets.symmetric(horizontal: 6, vertical: 5),
@@ -68,7 +69,9 @@ Widget buildClass(
                   ),
                   IconButton(
                     icon: const Icon(Icons.more_horiz, color: Colors.white, size: 28),
-                    onPressed: () {},
+                    onPressed: isInstructor ? null : () {
+                        showUnEnrolBottomSheet(context,classId);
+                    },
                   ),
                 ],
               ),
