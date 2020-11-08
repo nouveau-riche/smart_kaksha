@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 
-import '../utility/database.dart';
 import '../widgets/display_class.dart';
 import '../widgets/drawer.dart';
 import '../utility/google_signin.dart';
@@ -20,11 +19,8 @@ class _HomePageState extends State<HomePage> {
   void initState() {
     super.initState();
     User user = FirebaseAuth.instance.currentUser;
-    Future<Map<String, dynamic>> map = fetchUserDetails(user.uid);
-    map.then((value) {
-      setState(() {
-        imageUrl = value['imageURL'];
-      });
+    setState(() {
+      imageUrl = user.photoURL;
     });
   }
 

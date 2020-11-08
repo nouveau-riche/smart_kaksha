@@ -12,13 +12,6 @@ void saveUserInfoToFirestore(
   ref.set({'id': uid, 'name': name, 'email': email, 'imageURL': imageURL});
 }
 
-Future<Map<String, dynamic>> fetchUserDetails(String uid) async {
-  final ref = _firestoreInst.collection('users').doc(uid);
-
-  DocumentSnapshot snapshot = await ref.get();
-  return snapshot.data();
-}
-
 void saveClassOnFirebase(String uid, String name, String section,
     String subject, String instructor, String instructorPhotoUrl, bool isInst) {
   final ref1 = _firestoreInst
