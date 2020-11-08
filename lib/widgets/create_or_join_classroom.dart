@@ -15,20 +15,20 @@ Future<Widget> buildBottomSheet(BuildContext context) async {
               children: [
                 FlatButton(
                   child: const Text(
-                    'Join Class',
-                    style: const TextStyle(fontSize: 19),
-                  ),
-                  onPressed: () {
-                    buildJoinClass(context);
-                  },
-                ),
-                FlatButton(
-                  child: const Text(
                     'Create Class',
                     style: const TextStyle(fontSize: 19),
                   ),
                   onPressed: () {
                     buildCreateClass(context);
+                  },
+                ),
+                FlatButton(
+                  child: const Text(
+                    'Join Class',
+                    style: const TextStyle(fontSize: 19),
+                  ),
+                  onPressed: () {
+                    buildJoinClass(context);
                   },
                 ),
               ],

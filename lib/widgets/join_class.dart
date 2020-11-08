@@ -4,90 +4,108 @@ import 'package:firebase_auth/firebase_auth.dart';
 
 import '../utility/database.dart';
 
-TextEditingController _codeController = TextEditingController();
 bool isClassCodeValid = false;
+TextEditingController _codeController = TextEditingController();
 
 Future<Widget> buildJoinClass(BuildContext context) async {
   final mq = MediaQuery.of(context).size;
   return await showModalBottomSheet(
-    isScrollControlled: true,
+      isScrollControlled: true,
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(18)),
       context: context,
       builder: (ctx) => Container(
-            height: mq.height*0.8,
+            height: mq.height * 0.8,
             child: Column(
               children: [
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    IconButton(
-                      icon: Icon(Icons.clear),
-                      onPressed: () {
-                        Navigator.of(context).pop();
-                        Navigator.of(context).pop();
-                      },
-                    ),
-                    Text(
-                      'Join class',
-                      style: TextStyle(fontSize: 18),
-                    ),
-                    FlatButton(
-                      child: Text(
-                        'Join',
-                        style: TextStyle(fontSize: 16),
-                      ),
-                      onPressed: isClassCodeValid == false
-                          ? null
-                          : () async {
-                              User user = FirebaseAuth.instance.currentUser;
-
-                              DocumentSnapshot snapshot =
-                                  await FirebaseFirestore.instance
-                                      .collection('singleClass')
-                                      .doc(_codeController.text)
-                                      .get();
-                              joinClassOnFirebase(
-                                  _codeController.text,
-                                  snapshot.data()['name'],
-                                  snapshot.data()['section'],
-                                  snapshot.data()['subject'],
-                                  user.uid,
-                                  user.displayName,
-                                  user.photoURL);
-                              _codeController.clear();
-                            },
-                    )
-                  ],
-                ),
-                Center(
-                  //padding: EdgeInsets.all(5),
-                  child: Text(
-                    'Ask your teacher for the class code, then enter\nit here.',
-                    style: TextStyle(fontSize: 18, fontWeight: FontWeight.w400),
+                buildAppBar(context),
+                Container(
+                  margin: EdgeInsets.symmetric(vertical: 15),
+                  child: const Text(
+                    'Ask your teacher for the class code, then\nenter it here.',
+                    style: const TextStyle(
+                        fontSize: 18, fontWeight: FontWeight.w400),
                   ),
                 ),
-                buildClassCodeField(mq.width * 0.93)
+                buildClassCodeField(mq.width * 0.85)
               ],
             ),
           ));
 }
 
+Widget buildAppBar(BuildContext context) {
+  return Card(
+      elevation: 6,
+      shape: const RoundedRectangleBorder(
+          borderRadius: const BorderRadius.only(
+              topLeft: const Radius.circular(15),
+              topRight: const Radius.circular(18))),
+      child: Container(
+        padding: const EdgeInsets.all(6),
+        decoration: BoxDecoration(borderRadius: BorderRadius.circular(18)),
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            IconButton(
+              icon: const Icon(Icons.clear),
+              onPressed: () {
+                Navigator.of(context).pop();
+                Navigator.of(context).pop();
+              },
+            ),
+            const Text(
+              'Join class',
+              style: const TextStyle(fontSize: 18),
+            ),
+            FlatButton(
+              child: const Text(
+                'Join',
+                style: const TextStyle(fontSize: 16),
+              ),
+              onPressed: isClassCodeValid == false
+                  ? null
+                  : () async {
+                      User user = FirebaseAuth.instance.currentUser;
+
+                      DocumentSnapshot snapshot = await FirebaseFirestore
+                          .instance
+                          .collection('singleClass')
+                          .doc(_codeController.text)
+                          .get();
+                      joinClassOnFirebase(
+                          _codeController.text,
+                          snapshot.data()['name'],
+                          snapshot.data()['section'],
+                          snapshot.data()['subject'],
+                          user.uid,
+                          user.displayName,
+                          snapshot.data()['photoUrl'],
+                          user.photoURL);
+                      Navigator.of(context).pop();
+                      Navigator.of(context).pop();
+                      _codeController.clear();
+                    },
+            )
+          ],
+        ),
+      ));
+}
+
 Widget buildClassCodeField(double width) {
   return Container(
-    margin: EdgeInsets.symmetric(vertical: 8),
+    margin: const EdgeInsets.symmetric(vertical: 8),
     width: width,
     child: TextField(
       cursorColor: Colors.blue,
       decoration: InputDecoration(
         labelText: 'Class code',
-        labelStyle: TextStyle(color: Colors.grey),
+        labelStyle: const TextStyle(color: Colors.black87),
         enabledBorder: OutlineInputBorder(
           borderRadius: BorderRadius.circular(15),
-          borderSide: BorderSide(width: 1),
+          borderSide: const BorderSide(width: 1),
         ),
         focusedBorder: OutlineInputBorder(
           borderRadius: BorderRadius.circular(15),
-          borderSide: BorderSide(width: 1, color: Colors.blue),
+          borderSide: const BorderSide(width: 1, color: Colors.blue),
         ),
       ),
       controller: _codeController,

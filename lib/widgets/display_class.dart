@@ -26,7 +26,7 @@ Widget buildClass(
     double height, double width, String className, String section,bool isInstructor) {
   return Card(
     elevation: 5,
-    margin: EdgeInsets.symmetric(horizontal: 6, vertical: 5),
+    margin: const EdgeInsets.symmetric(horizontal: 6, vertical: 5),
     shape: RoundedRectangleBorder(
       borderRadius: BorderRadius.circular(14),
     ),
@@ -48,7 +48,7 @@ Widget buildClass(
           ),
         ),
         Container(
-          padding: EdgeInsets.symmetric(horizontal: 10, vertical: 5),
+          padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 5),
           height: height,
           decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(12),
@@ -61,20 +61,20 @@ Widget buildClass(
                 children: [
                   Text(
                     className,
-                    style: TextStyle(
+                    style: const TextStyle(
                         fontSize: 22,
                         color: Colors.white,
                         fontWeight: FontWeight.bold),
                   ),
                   IconButton(
-                    icon: Icon(Icons.more_horiz, color: Colors.white, size: 28),
+                    icon: const Icon(Icons.more_horiz, color: Colors.white, size: 28),
                     onPressed: () {},
                   ),
                 ],
               ),
               Text(
                 section,
-                style: TextStyle(
+                style: const TextStyle(
                     fontSize: 21,
                     color: Colors.white,
                     fontWeight: FontWeight.bold),

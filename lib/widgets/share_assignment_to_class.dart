@@ -9,27 +9,33 @@ File file;
 String postId = Uuid().v4();
 final _assignmentController = TextEditingController();
 
-Future<Widget> buildAssignAssignment({BuildContext context, String uid,String classId,String studentName,bool isInstructor}) async {
+Future<Widget> buildShareAssignment(
+    {BuildContext context,
+    String uid,
+    String classId,
+    String studentName,
+    bool isInstructor}) async {
   final mq = MediaQuery.of(context).size;
   return await showModalBottomSheet(
       isScrollControlled: true,
       context: context,
       shape: const RoundedRectangleBorder(
-          borderRadius: BorderRadius.only(
-              topLeft: Radius.circular(15), topRight: Radius.circular(15))),
+          borderRadius: const BorderRadius.only(
+              topLeft: const Radius.circular(15),
+              topRight: const Radius.circular(15))),
       builder: (ctx) => Container(
             height: mq.height * 0.8,
             decoration: BoxDecoration(borderRadius: BorderRadius.circular(15)),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                buildAppbar(context,uid,classId,studentName,isInstructor),
+                buildAppbar(context, uid, classId, studentName, isInstructor),
                 buildAddAttachment(),
-                Divider(
+                const Divider(
                   color: Colors.black54,
                 ),
                 buildAddMessage(uid),
-                Divider(
+                const Divider(
                   color: Colors.black54,
                 ),
               ],
@@ -37,31 +43,46 @@ Future<Widget> buildAssignAssignment({BuildContext context, String uid,String cl
           ));
 }
 
-Widget buildAppbar(BuildContext context,String uid,String classId,String studentName,bool isInstructor) {
+Widget buildAppbar(BuildContext context, String uid, String classId,
+    String studentName, bool isInstructor) {
   return Card(
     elevation: 6,
     shape: const RoundedRectangleBorder(
-        borderRadius: BorderRadius.only(
-            topLeft: Radius.circular(15), topRight: Radius.circular(15))),
+        borderRadius: const BorderRadius.only(
+            topLeft: const Radius.circular(15),
+            topRight: const Radius.circular(15))),
     child: Container(
-      padding: EdgeInsets.all(10),
+      padding: const EdgeInsets.all(10),
       decoration: BoxDecoration(borderRadius: BorderRadius.circular(15)),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
           IconButton(
-            icon: Icon(Icons.clear),
+            icon: const Icon(Icons.clear),
             onPressed: () {
               Navigator.of(context).pop();
+              postId = Uuid().v4();
+              _assignmentController.clear();
+              file = null;
             },
           ),
           RaisedButton(
             color: Colors.blue,
-            child: Text('Post'),
+            child: const Text(
+              'Post',
+              style: const TextStyle(fontSize: 16),
+            ),
             onPressed: () async {
               Navigator.of(context).pop();
-              String downloadUrl = await uploadAssignmentOnFirebaseStorage(postId, file);
-              updateAssignmentInClass(uid,classId,_assignmentController.text,downloadUrl,studentName,isInstructor);
+              //add validation here
+              if (file == null) {
+                return;
+              }
+              String downloadUrl =
+                  await uploadAssignmentOnFirebaseStorage(postId, file);
+
+              updateAssignmentInClass(uid, classId, _assignmentController.text,
+                  downloadUrl, studentName, isInstructor);
               postId = Uuid().v4();
               _assignmentController.clear();
             },
@@ -78,11 +99,11 @@ Widget buildAddAttachment() {
     mainAxisAlignment: MainAxisAlignment.spaceBetween,
     children: [
       FlatButton.icon(
-        label: Text(
+        label: const Text(
           'Add attachment',
-          style: TextStyle(color: Colors.black87),
+          style: const TextStyle(color: Colors.black87),
         ),
-        icon: Icon(Icons.attachment),
+        icon: const Icon(Icons.attachment),
         onPressed: () async {
           result = await FilePicker.platform.pickFiles();
           if (result != null) {
@@ -92,7 +113,7 @@ Widget buildAddAttachment() {
           }
         },
       ),
-      Icon(Icons.done,color: result != null ? Colors.green : Colors.white)
+      Icon(Icons.done, color: result != null ? Colors.green : Colors.white)
     ],
   );
 }
@@ -100,24 +121,24 @@ Widget buildAddAttachment() {
 buildAddMessage(String uid) {
   return Row(
     children: [
-      SizedBox(
+      const SizedBox(
         width: 10,
       ),
-      Icon(Icons.subject),
-      SizedBox(
+      const Icon(Icons.subject),
+      const SizedBox(
         width: 10,
       ),
       Container(
           width: 200,
           child: TextField(
             cursorColor: Colors.grey,
-            decoration: InputDecoration(
+            decoration: const InputDecoration(
               hintText: 'Share with your class',
-              hintStyle: TextStyle(color: Colors.black87),
-              enabledBorder: UnderlineInputBorder(
-                  borderSide: BorderSide(color: Colors.white)),
-              focusedBorder: UnderlineInputBorder(
-                  borderSide: BorderSide(color: Colors.white)),
+              hintStyle: const TextStyle(color: Colors.black87),
+              enabledBorder: const UnderlineInputBorder(
+                  borderSide: const BorderSide(color: Colors.white)),
+              focusedBorder: const UnderlineInputBorder(
+                  borderSide: const BorderSide(color: Colors.white)),
             ),
             controller: _assignmentController,
           )),

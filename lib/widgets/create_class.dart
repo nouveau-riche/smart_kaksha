@@ -59,23 +59,25 @@ Widget buildAppBar(BuildContext context) {
               style: const TextStyle(fontSize: 16),
             ),
             onPressed: isSubjectNameValid == false ||
-                isClassNameValid == false ||
-                isSectionNameValid == false
+                    isClassNameValid == false ||
+                    isSectionNameValid == false
                 ? null
                 : () {
-              User user = FirebaseAuth.instance.currentUser;
-              saveClassOnFirebase(
-                  user.uid,
-                  _className.text,
-                  _secName.text,
-                  _subjectName.text,
-                  user.displayName,
-                  true);
-              Navigator.of(context).pop();
-              _className.clear();
-              _secName.clear();
-              _subjectName.clear();
-            },
+                    User user = FirebaseAuth.instance.currentUser;
+                    saveClassOnFirebase(
+                        user.uid,
+                        _className.text,
+                        _secName.text,
+                        _subjectName.text,
+                        user.displayName,
+                        user.photoURL,
+                        true);
+                    Navigator.of(context).pop();
+                    Navigator.of(context).pop();
+                    _className.clear();
+                    _secName.clear();
+                    _subjectName.clear();
+                  },
           )
         ],
       ),

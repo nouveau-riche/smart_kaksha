@@ -20,7 +20,7 @@ Future<Map<String, dynamic>> fetchUserDetails(String uid) async {
 }
 
 void saveClassOnFirebase(String uid, String name, String section,
-    String subject, String instructor, bool isInst) {
+    String subject, String instructor, String instructorPhotoUrl, bool isInst) {
   final ref1 = _firestoreInst
       .collection('classesCreated')
       .doc(uid)
@@ -32,6 +32,7 @@ void saveClassOnFirebase(String uid, String name, String section,
     'name': name,
     'section': section,
     'subject': subject,
+    'photoUrl': instructorPhotoUrl,
     'instructor': instructor,
     'isInstructor': true
   });
@@ -45,12 +46,20 @@ void saveClassOnFirebase(String uid, String name, String section,
     'subject': subject,
     'instructor': instructor,
     'isInstructor': true,
+    'photoUrl': instructorPhotoUrl,
     'studentJoined': []
   });
 }
 
-void joinClassOnFirebase(String classId, String name, String section,
-    String subject, String studentUID, String studentName, String imageUrl) {
+void joinClassOnFirebase(
+    String classId,
+    String name,
+    String section,
+    String subject,
+    String studentUID,
+    String studentName,
+    String instructorPhotoUrl,
+    String imageUrl) {
   final ref = _firestoreInst
       .collection('classesCreated')
       .doc(studentUID)
@@ -62,6 +71,7 @@ void joinClassOnFirebase(String classId, String name, String section,
     'name': name,
     'section': section,
     'subject': subject,
+    'instructor_photo_url': instructorPhotoUrl,
     'isInstructor': false
   });
 
@@ -99,7 +109,8 @@ void fetchClasses(String uid) async {
       await ref.orderBy('timestamp', descending: true).get();
 }
 
-Future<String> uploadAssignmentOnFirebaseStorage(String postId, File file) async {
+Future<String> uploadAssignmentOnFirebaseStorage(
+    String postId, File file) async {
   final ref = _firebaseStrorage.ref().child('documents');
   StorageUploadTask storageUploadTask = ref.child(postId).putFile(file);
   StorageTaskSnapshot storageTaskSnapshot = await storageUploadTask.onComplete;

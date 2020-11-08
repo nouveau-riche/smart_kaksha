@@ -22,8 +22,6 @@ Future<String> signInWithGoogle(BuildContext context) async {
     idToken: googleSignInAuthentication.idToken,
   );
 
-  print(credential);
-
   String name;
   String email;
   String imageUrl;
