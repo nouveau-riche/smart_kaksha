@@ -1,10 +1,13 @@
 import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:file_picker/file_picker.dart';
+import 'package:uuid/uuid.dart';
 
 import '../utility/database.dart';
 
 File file;
+String postId = Uuid().v4();
+final _assignmentController = TextEditingController();
 
 Future<Widget> buildAssignAssignment({BuildContext context, String uid,String classId,String studentName,bool isInstructor}) async {
   final mq = MediaQuery.of(context).size;
@@ -57,8 +60,10 @@ Widget buildAppbar(BuildContext context,String uid,String classId,String student
             child: Text('Post'),
             onPressed: () async {
               Navigator.of(context).pop();
-              String downloadUrl = await uploadAssignmentOnFirebaseStorage(uid, file);
-              updateAssignmentInClass(classId,downloadUrl,studentName,isInstructor);
+              String downloadUrl = await uploadAssignmentOnFirebaseStorage(postId, file);
+              updateAssignmentInClass(uid,classId,_assignmentController.text,downloadUrl,studentName,isInstructor);
+              postId = Uuid().v4();
+              _assignmentController.clear();
             },
           ),
         ],
@@ -114,6 +119,7 @@ buildAddMessage(String uid) {
               focusedBorder: UnderlineInputBorder(
                   borderSide: BorderSide(color: Colors.white)),
             ),
+            controller: _assignmentController,
           )),
     ],
   );

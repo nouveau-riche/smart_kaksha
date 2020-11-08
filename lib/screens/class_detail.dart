@@ -1,9 +1,11 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:collage_classroom/widgets/assign_assignment_to_class.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
 import '../widgets/display_class.dart';
 import '../widgets/drawer.dart';
+import '../widgets/assignment.dart';
 
 class ClassDetail extends StatefulWidget {
   final String classId;
@@ -22,7 +24,9 @@ class _ClassDetailState extends State<ClassDetail> {
 
   @override
   Widget build(BuildContext context) {
-    final mq = MediaQuery.of(context).size;
+    final mq = MediaQuery
+        .of(context)
+        .size;
     return Scaffold(
       appBar: AppBar(
         elevation: 0,
@@ -31,38 +35,68 @@ class _ClassDetailState extends State<ClassDetail> {
         actions: [
           widget.isInstructor
               ? IconButton(
-                  icon: Icon(
-                    Icons.settings,
-                    color: Colors.black54,
-                  ),
-                  onPressed: () {},
-                )
+            icon: Icon(
+              Icons.settings,
+              color: Colors.black54,
+            ),
+            onPressed: () {},
+          )
               : IconButton(
-                  icon: Icon(
-                    Icons.description,
-                    color: Colors.black54,
-                  ),
-                  onPressed: () {},
-                ),
+            icon: Icon(
+              Icons.description,
+              color: Colors.black54,
+            ),
+            onPressed: () {},
+          ),
         ],
       ),
       drawer: Drawer(
         child: buildDrawerContent(context),
       ),
       body: Column(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        mainAxisSize: MainAxisSize.min,
         children: [
-          Column(
-            mainAxisSize: MainAxisSize.min,
-            children: [
-              buildClass(mq.height * 0.16, mq.width, widget.className,
-                  widget.section, widget.isInstructor),
-              buildShareSomething(context, mq.height * 0.08)
-            ],
-          ),
+          buildClass(mq.height * 0.16, mq.width, widget.className,
+              widget.section, widget.isInstructor),
+          buildShareSomething(context, mq.height * 0.08),
+          buildAssignmentStream(),
           buildBottomNavigationBar(mq.height * 0.1, mq.width * 0.5),
         ],
       ),
+    );
+  }
+
+  buildAssignmentStream() {
+    return StreamBuilder(
+      stream: FirebaseFirestore.instance
+          .collection('assignments')
+          .doc(widget.classId)
+          .collection('allAssignments')
+          .snapshots(),
+      builder: (context, snapshot) {
+        if (snapshot.hasData) {
+          final _data = snapshot.data;
+          List<Assignment> allAssignment = [];
+          _data.docs.map((doc) {
+            allAssignment.add(
+                Assignment(
+                  assignmentName: doc['assignmentName'],
+                  isInstructor: doc['isInstructor'],
+                  url: doc['url'],
+                  studentName: doc['studentName'],
+                timestamp: doc['timestamp'],)
+            );
+          }).toList();
+          return Flexible(
+            fit: FlexFit.loose,
+            child: ListView.builder(
+              itemBuilder: (ctx, index) => allAssignment[index],
+              itemCount: allAssignment.length),
+          );
+        } else {
+          return Text('nikunj');
+        }
+      },
     );
   }
 
@@ -118,8 +152,7 @@ class _ClassDetailState extends State<ClassDetail> {
             uid: user.uid,
             classId: widget.classId,
             studentName: user.displayName,
-            isInstructor: widget.isInstructor
-        );
+            isInstructor: widget.isInstructor);
       },
       child: Card(
         elevation: 8,

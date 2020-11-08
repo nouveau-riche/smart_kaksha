@@ -1,6 +1,6 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 
 import '../utility/database.dart';
 import '../widgets/display_class.dart';
@@ -31,18 +31,19 @@ class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Colors.white,
       appBar: AppBar(
-        backgroundColor: Colors.white,
+        backgroundColor: Colors.white12,
         elevation: 0,
-        iconTheme: IconThemeData(color: Colors.black),
-        title: Text(
+        iconTheme: const IconThemeData(color: Colors.black),
+        title: const Text(
           'Collage Classroom',
-          style: TextStyle(color: Colors.black54),
+          style: const TextStyle(color: Colors.black54),
         ),
         centerTitle: true,
         actions: [
           Padding(
-            padding: EdgeInsets.all(10),
+            padding: const EdgeInsets.all(10),
             child: GestureDetector(
               onTap: () {
                 signOutGoogle();
@@ -65,7 +66,7 @@ class _HomePageState extends State<HomePage> {
       floatingActionButton: FloatingActionButton(
         backgroundColor: Colors.white,
         foregroundColor: Colors.blue,
-        child: Icon(Icons.add, size: 30),
+        child: const Icon(Icons.add, size: 30),
         onPressed: () => buildBottomSheet(context),
       ),
     );
@@ -82,22 +83,58 @@ class _HomePageState extends State<HomePage> {
         builder: (context, snapshot) {
           if (snapshot.hasData) {
             final _data = snapshot.data;
+
             List<DisplayClass> classes = [];
             _data.docs.map((doc) {
-              classes.add( DisplayClass(
+              classes.add(DisplayClass(
                 classId: doc['class_id'],
                 className: doc['name'],
                 section: doc['section'],
                 isInstructor: doc['isInstructor'],
               ));
             }).toList();
+
+            if (classes.length == 0) {
+              return buildNoClass();
+            }
+
             return ListView.builder(
               itemBuilder: (ctx, index) => classes[index],
               itemCount: classes.length,
             );
           } else {
-            return Text('No active Clasees');
+            return buildNoClass();
           }
         });
+  }
+
+  Widget buildNoClass() {
+    return Column(
+      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+      children: [
+        Container(
+            height: 380,
+            child: Image.asset(
+              "assets/images/no-class.png",
+            )),
+        const Text(
+          "Don't see your existing classes?",
+          style: const TextStyle(fontWeight: FontWeight.w500, fontSize: 15),
+        ),
+        const SizedBox(height: 30),
+        Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            const Text('Create or join your first class'),
+            Container(
+                padding: const EdgeInsets.only(left: 110),
+                height: 70,
+                child: Image.asset(
+                  "assets/images/blinking-arrow.gif",
+                )),
+          ],
+        ),
+      ],
+    );
   }
 }

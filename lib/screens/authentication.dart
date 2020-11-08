@@ -1,13 +1,8 @@
-import 'package:collage_classroom/utility/database.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
 import '../utility/google_signin.dart';
-import './home_page.dart';
-
 
 class Authentication extends StatelessWidget {
-
   @override
   Widget build(BuildContext context) {
     final mq = MediaQuery.of(context).size;
@@ -45,6 +40,7 @@ class Authentication extends StatelessWidget {
             height: mq.height * 0.12,
             child: Center(
               child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
                 mainAxisSize: MainAxisSize.min,
                 children: [
                   const Text(
@@ -74,7 +70,7 @@ class Authentication extends StatelessWidget {
                     color: const Color.fromRGBO(25, 128, 58, 1), fontSize: 17),
               ),
               onPressed: () {
-                signInWithGoogle(context).whenComplete((){
+                signInWithGoogle(context).whenComplete(() {
                   print('done successfully');
                 });
               },

@@ -74,14 +74,19 @@ void joinClassOnFirebase(String classId, String name, String section,
   });
 }
 
-void updateAssignmentInClass(String classId,String url,String studentName,bool isInstructor) {
-  final ref = FirebaseFirestore.instance.collection('singleClass').doc(classId);
-  ref.update({
-    'assignments': FieldValue.arrayUnion([{
-      'url': url,
-      'name': studentName,
-      'isInstructor': isInstructor
-    }])
+void updateAssignmentInClass(String uid, String classId, String assignmentName,
+    String url, String studentName, bool isInstructor) {
+  final ref = FirebaseFirestore.instance
+      .collection('assignments')
+      .doc(classId)
+      .collection('allAssignments')
+      .doc(uid);
+  ref.set({
+    'assignmentName': assignmentName,
+    'url': url,
+    'studentName': studentName,
+    'isInstructor': isInstructor,
+    'timestamp': Timestamp.now()
   });
 }
 
@@ -94,9 +99,9 @@ void fetchClasses(String uid) async {
       await ref.orderBy('timestamp', descending: true).get();
 }
 
-Future<String> uploadAssignmentOnFirebaseStorage(String uid, File file) async {
-  final ref = _firebaseStrorage.ref().child(uid);
-  StorageUploadTask storageUploadTask = ref.child(uid).putFile(file);
+Future<String> uploadAssignmentOnFirebaseStorage(String postId, File file) async {
+  final ref = _firebaseStrorage.ref().child('documents');
+  StorageUploadTask storageUploadTask = ref.child(postId).putFile(file);
   StorageTaskSnapshot storageTaskSnapshot = await storageUploadTask.onComplete;
   String downloadUrl = await storageTaskSnapshot.ref.getDownloadURL();
   return downloadUrl;
