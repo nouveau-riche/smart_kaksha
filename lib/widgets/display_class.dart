@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 
 import '../screens/class_detail.dart';
 import '../widgets/unenrol_joined_class.dart';
+import '../widgets/share_joining_code.dart';
 
 class DisplayClass extends StatelessWidget {
   final String classId;
@@ -69,7 +70,9 @@ Widget buildClass(BuildContext context,
                   ),
                   IconButton(
                     icon: const Icon(Icons.more_horiz, color: Colors.white, size: 28),
-                    onPressed: isInstructor ? null : () {
+                    onPressed: isInstructor ? (){
+                      showShareInvitationBottomSheet(context, classId);
+                    } : () {
                         showUnEnrolBottomSheet(context,classId);
                     },
                   ),
