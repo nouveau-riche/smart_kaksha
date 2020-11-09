@@ -86,6 +86,7 @@ class _HomePageState extends State<HomePage> {
                 classId: doc['class_id'],
                 className: doc['name'],
                 section: doc['section'],
+                subject: doc['subject'],
                 isInstructor: doc['isInstructor'],
               ));
             }).toList();

@@ -54,7 +54,7 @@ showDeleteAlert(BuildContext context,String classId,String assignmentId) {
           FlatButton(
             child: Text(
               'DELETE',
-              style: TextStyle(fontWeight: FontWeight.w500),
+              style: TextStyle(fontWeight: FontWeight.w500,color: Colors.redAccent),
             ),
             onPressed: () {
               deleteAssignment(classId, assignmentId);

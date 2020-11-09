@@ -8,9 +8,10 @@ class DisplayClass extends StatelessWidget {
   final String classId;
   final String className;
   final String section;
+  final String subject;
   final bool isInstructor;
 
-  DisplayClass({this.classId,this.className, this.section, this.isInstructor});
+  DisplayClass({this.classId,this.className, this.section, this.subject,this.isInstructor});
 
   @override
   Widget build(BuildContext context) {
@@ -18,7 +19,7 @@ class DisplayClass extends StatelessWidget {
     return InkWell(
         onTap: () {
           Navigator.of(context).push(MaterialPageRoute(
-              builder: (ctx) => ClassDetail(classId,className, section, isInstructor)));
+              builder: (ctx) => ClassDetail(classId,className, section, subject,isInstructor)));
         },
         child: buildClass(context,mq.height * 0.16, mq.width, classId,className, section,isInstructor));
   }

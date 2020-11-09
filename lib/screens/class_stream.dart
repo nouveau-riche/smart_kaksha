@@ -6,15 +6,17 @@ import 'package:firebase_auth/firebase_auth.dart';
 import '../widgets/display_class.dart';
 import '../widgets/drawer.dart';
 import '../widgets/assignment.dart';
+import '../widgets/about_class.dart';
 
 class ClassStreamScreen extends StatelessWidget{
 
   final String classId;
   final String className;
   final String section;
+  final String subject;
   final bool isInstructor;
 
-  ClassStreamScreen(this.classId, this.className, this.section, this.isInstructor);
+  ClassStreamScreen(this.classId, this.className, this.section, this.subject,this.isInstructor);
 
   @override
   Widget build(BuildContext context) {
@@ -38,7 +40,9 @@ class ClassStreamScreen extends StatelessWidget{
               Icons.description,
               color: Colors.black54,
             ),
-            onPressed: () {},
+            onPressed: () {
+              showAboutClassBottomSheet(context, className, section, subject);
+            },
           ),
         ],
       ),

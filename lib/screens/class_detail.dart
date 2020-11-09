@@ -7,9 +7,10 @@ class ClassDetail extends StatefulWidget {
   final String classId;
   final String className;
   final String section;
+  final String subject;
   final bool isInstructor;
 
-  ClassDetail(this.classId, this.className, this.section, this.isInstructor);
+  ClassDetail(this.classId, this.className, this.section, this.subject,this.isInstructor);
 
   @override
   _ClassDetailState createState() => _ClassDetailState();
@@ -57,7 +58,7 @@ class _ClassDetailState extends State<ClassDetail> {
           PageView(
             children: [
               ClassStreamScreen(widget.classId, widget.className,
-                  widget.section, widget.isInstructor),
+                  widget.section, widget.subject,widget.isInstructor),
               PeopleInClass(widget.classId,widget.className)
             ],
             controller: _controller,
