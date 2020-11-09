@@ -66,6 +66,7 @@ class ClassStreamScreen extends StatelessWidget{
             uid: user.uid,
             classId: classId,
             studentName: user.displayName,
+            studentPhotoUrl: user.photoURL,
             isInstructor: isInstructor);
       },
       child: Card(
@@ -111,9 +112,13 @@ class ClassStreamScreen extends StatelessWidget{
           List<Assignment> allAssignment = [];
           _data.docs.map((doc) {
             allAssignment.add(Assignment(
+              classId: classId,
+              assignmentId: doc['assignmentId'],
+              uid: doc['uid'],
               assignmentName: doc['assignmentName'],
               isInstructor: doc['isInstructor'],
               url: doc['url'],
+              photoUrl: doc['photoUrl'],
               studentName: doc['studentName'],
               timestamp: doc['timestamp'],
             ));

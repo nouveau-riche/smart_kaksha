@@ -2,18 +2,29 @@ import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:timeago/timeago.dart' as timeAgo;
 import 'package:url_launcher/url_launcher.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+
+import '../widgets/delete_assignment.dart';
 
 class Assignment extends StatelessWidget {
+  final String classId;
+  final String assignmentId;
+  final String uid;
   final String studentName;
   final String assignmentName;
   final String url;
+  final String photoUrl;
   final bool isInstructor;
   final Timestamp timestamp;
 
   Assignment(
-      {this.assignmentName,
+      {this.classId,
+      this.assignmentId,
+      this.uid,
+      this.assignmentName,
       this.url,
       this.studentName,
+      this.photoUrl,
       this.isInstructor,
       this.timestamp});
 
@@ -22,9 +33,9 @@ class Assignment extends StatelessWidget {
     final mq = MediaQuery.of(context).size;
     return InkWell(
       onTap: () async {
-        if(await canLaunch(url)){
+        if (await canLaunch(url)) {
           await launch(url);
-        }else{
+        } else {
           print('cannot open');
         }
       },
@@ -36,13 +47,13 @@ class Assignment extends StatelessWidget {
           ),
           child: isInstructor
               ? buildAssignmentPostedByInstructor(mq.height * 0.1)
-              : buildAssignmentPostedByStudent(mq.height * 0.1)),
+              : buildAssignmentPostedByStudent(context,mq.height * 0.1)),
     );
   }
 
   Widget buildAssignmentPostedByInstructor(double height) {
     return Container(
-      padding: EdgeInsets.only(left: 10,right: 10,top: 20),
+      padding: EdgeInsets.only(left: 10, right: 10, top: 20),
       height: height,
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(12),
@@ -53,19 +64,19 @@ class Assignment extends StatelessWidget {
           CircleAvatar(
             radius: 20,
             backgroundColor: Colors.green,
+            backgroundImage: NetworkImage(photoUrl),
           ),
           SizedBox(width: 10),
           Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Row(
-                children: [
-                  Text(
-                    'New Assignment Posted: ',
-                    style: TextStyle(fontWeight: FontWeight.bold),
-                  ),
-                  Text(assignmentName),
-                ],
+              Container(
+                width: 270,
+                child: Text(
+                  'New Assignment Posted: $assignmentName',
+                  overflow: TextOverflow.fade,
+                  style: TextStyle(fontWeight: FontWeight.bold),
+                ),
               ),
               Text(timeAgo.format(timestamp.toDate()),
                   style: TextStyle(color: Colors.black87)),
@@ -76,7 +87,9 @@ class Assignment extends StatelessWidget {
     );
   }
 
-  Widget buildAssignmentPostedByStudent(double height) {
+  User user = FirebaseAuth.instance.currentUser;
+
+  Widget buildAssignmentPostedByStudent(BuildContext context,double height) {
     return Container(
       padding: EdgeInsets.all(10),
       child: Column(
@@ -89,7 +102,8 @@ class Assignment extends StatelessWidget {
                 children: [
                   CircleAvatar(
                     radius: 20,
-                    backgroundColor: Colors.green,
+                    backgroundColor: Colors.grey,
+                    backgroundImage: NetworkImage(photoUrl),
                   ),
                   SizedBox(width: 10),
                   Column(
@@ -109,10 +123,12 @@ class Assignment extends StatelessWidget {
                   ),
                 ],
               ),
-              IconButton(
-                icon: Icon(Icons.more_horiz),
-                onPressed: () {},
-              ),
+              user.uid == uid
+                  ? IconButton(
+                      icon: Icon(Icons.more_horiz),
+                      onPressed: () {showDeleteAssignmentBottomSheet(context, classId,assignmentId);},
+                    )
+                  : Container(),
             ],
           ),
           SizedBox(height: 10),

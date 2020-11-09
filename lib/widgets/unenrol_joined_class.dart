@@ -3,8 +3,8 @@ import 'package:firebase_auth/firebase_auth.dart';
 
 import '../utility/database.dart';
 
-
-Future<Widget> showUnEnrolBottomSheet(BuildContext context,String classId) async {
+Future<Widget> showUnEnrolBottomSheet(
+    BuildContext context, String classId) async {
   final mq = MediaQuery.of(context).size;
   return await showModalBottomSheet(
       context: context,
@@ -21,8 +21,7 @@ Future<Widget> showUnEnrolBottomSheet(BuildContext context,String classId) async
                   ),
                   onPressed: () {
                     Navigator.of(context).pop();
-                    showUnEnrolAlert(context,classId);
-                    Navigator.of(context).pop();
+                    showUnEnrolAlert(context, classId);
                   },
                 ),
               ],
@@ -30,10 +29,12 @@ Future<Widget> showUnEnrolBottomSheet(BuildContext context,String classId) async
           ));
 }
 
-showUnEnrolAlert(BuildContext context,String classId) {
+showUnEnrolAlert(BuildContext context, String classId) {
   return showDialog(
       context: context,
       builder: (ctx) => AlertDialog(
+            shape:
+                RoundedRectangleBorder(borderRadius: BorderRadius.circular(14)),
             title: Text(
               'Unerol',
               style: TextStyle(fontWeight: FontWeight.w500),
@@ -60,6 +61,7 @@ showUnEnrolAlert(BuildContext context,String classId) {
                 onPressed: () {
                   User user = FirebaseAuth.instance.currentUser;
                   unEnrolFromJoinedClass(user.uid, classId);
+                  Navigator.of(context).pop();
                 },
               ),
             ],

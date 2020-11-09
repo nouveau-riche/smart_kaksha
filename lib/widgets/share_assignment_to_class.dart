@@ -14,6 +14,7 @@ Future<Widget> buildShareAssignment(
     String uid,
     String classId,
     String studentName,
+    String studentPhotoUrl,
     bool isInstructor}) async {
   final mq = MediaQuery.of(context).size;
   return await showModalBottomSheet(
@@ -29,7 +30,8 @@ Future<Widget> buildShareAssignment(
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                buildAppbar(context, uid, classId, studentName, isInstructor),
+                buildAppbar(context, uid, classId, studentName, studentPhotoUrl,
+                    isInstructor),
                 buildAddAttachment(),
                 const Divider(
                   color: Colors.black54,
@@ -44,7 +46,7 @@ Future<Widget> buildShareAssignment(
 }
 
 Widget buildAppbar(BuildContext context, String uid, String classId,
-    String studentName, bool isInstructor) {
+    String studentName, String photoUrl, bool isInstructor) {
   return Card(
     elevation: 6,
     shape: const RoundedRectangleBorder(
@@ -74,7 +76,6 @@ Widget buildAppbar(BuildContext context, String uid, String classId,
             ),
             onPressed: () async {
               Navigator.of(context).pop();
-              //add validation here
               if (file == null) {
                 return;
               }
@@ -82,7 +83,7 @@ Widget buildAppbar(BuildContext context, String uid, String classId,
                   await uploadAssignmentOnFirebaseStorage(postId, file);
 
               updateAssignmentInClass(uid, classId, _assignmentController.text,
-                  downloadUrl, studentName, isInstructor);
+                  downloadUrl, studentName, photoUrl, isInstructor);
               postId = Uuid().v4();
               _assignmentController.clear();
             },
@@ -98,21 +99,23 @@ Widget buildAddAttachment() {
   return Row(
     mainAxisAlignment: MainAxisAlignment.spaceBetween,
     children: [
-      FlatButton.icon(
-        label: const Text(
-          'Add attachment',
-          style: const TextStyle(color: Colors.black87),
-        ),
-        icon: const Icon(Icons.attachment),
-        onPressed: () async {
-          result = await FilePicker.platform.pickFiles();
-          if (result != null) {
-            file = File(result.files.single.path);
-          } else {
-            // User canceled the picker
-          }
-        },
-      ),
+      result != null
+          ? Text(result.files.single.path)
+          : FlatButton.icon(
+              label: const Text(
+                'Add attachment',
+                style: const TextStyle(color: Colors.black87),
+              ),
+              icon: const Icon(Icons.attachment),
+              onPressed: () async {
+                result = await FilePicker.platform.pickFiles();
+                if (result != null) {
+                  file = File(result.files.single.path);
+                } else {
+                  // User canceled the picker
+                }
+              },
+            ),
       Icon(Icons.done, color: result != null ? Colors.green : Colors.white)
     ],
   );

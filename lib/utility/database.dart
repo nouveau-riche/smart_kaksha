@@ -5,8 +5,8 @@ import 'package:firebase_storage/firebase_storage.dart';
 final _firestoreInst = FirebaseFirestore.instance;
 final _firebaseStrorage = FirebaseStorage.instance;
 
-void saveUserInfoToFirestore(
-    String uid, String name, String imageURL, String email) {
+void saveUserInfoToFirestore(String uid, String name, String imageURL,
+    String email) {
   final ref = _firestoreInst.collection('users').doc(uid);
 
   ref.set({'id': uid, 'name': name, 'email': email, 'imageURL': imageURL});
@@ -44,8 +44,7 @@ void createClassOnFirebase(String uid, String name, String section,
   });
 }
 
-void joinClassOnFirebase(
-    String classId,
+void joinClassOnFirebase(String classId,
     String name,
     String section,
     String subject,
@@ -69,7 +68,7 @@ void joinClassOnFirebase(
   });
 
   final ref1 =
-      FirebaseFirestore.instance.collection('singleClass').doc(classId);
+  FirebaseFirestore.instance.collection('singleClass').doc(classId);
   ref1.update({
     'studentJoined': FieldValue.arrayUnion([
       {'studentName': studentName, 'studentImageUrl': imageUrl}
@@ -77,23 +76,26 @@ void joinClassOnFirebase(
   });
 }
 
-void unEnrolFromJoinedClass(String uid,String classId){
-  final ref = _firestoreInst.collection('classesCreated').doc(uid).collection('allClasses').doc(classId);
+void unEnrolFromJoinedClass(String uid, String classId) {
+  final ref = _firestoreInst.collection('classesCreated').doc(uid).collection(
+      'allClasses').doc(classId);
   ref.delete();
 }
 
 void updateAssignmentInClass(String uid, String classId, String assignmentName,
-    String url, String studentName, bool isInstructor) {
+    String url, String studentName, String studentPhotoUrl, bool isInstructor) {
   final ref = FirebaseFirestore.instance
       .collection('assignments')
       .doc(classId)
       .collection('allAssignments')
-      .doc(uid);
+      .doc();
   ref.set({
+    'uid': uid,
     'assignmentName': assignmentName,
     'url': url,
     'studentName': studentName,
     'isInstructor': isInstructor,
+    'photoUrl': studentPhotoUrl,
     'timestamp': Timestamp.now()
   });
 }
@@ -104,14 +106,21 @@ void fetchClasses(String uid) async {
       .doc(uid)
       .collection('allClasses');
   QuerySnapshot snapshot =
-      await ref.orderBy('timestamp', descending: true).get();
+  await ref.orderBy('timestamp', descending: true).get();
 }
 
-Future<String> uploadAssignmentOnFirebaseStorage(
-    String postId, File file) async {
+Future<String> uploadAssignmentOnFirebaseStorage(String postId,
+    File file) async {
   final ref = _firebaseStrorage.ref().child('documents');
   StorageUploadTask storageUploadTask = ref.child(postId).putFile(file);
   StorageTaskSnapshot storageTaskSnapshot = await storageUploadTask.onComplete;
   String downloadUrl = await storageTaskSnapshot.ref.getDownloadURL();
   return downloadUrl;
+}
+
+void deleteAssignment(String classId,String assignmentId) {
+  final ref = FirebaseFirestore.instance.collection('assignments')
+      .doc(classId)
+      .collection('allAssignments').doc(assignmentId);
+  ref.delete();
 }
