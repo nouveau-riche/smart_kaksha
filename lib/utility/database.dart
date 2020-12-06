@@ -82,6 +82,12 @@ void unEnrolFromJoinedClass(String uid, String classId) {
   ref.delete();
 }
 
+void deleteCreatedClass(String uid, String classId) {
+  final ref = _firestoreInst.collection('classesCreated').doc(uid).collection(
+      'allClasses').doc(classId);
+  ref.delete();
+}
+
 void updateAssignmentInClass(String uid, String classId, String assignmentName,
     String url, String studentName, String studentPhotoUrl, bool isInstructor) {
   final ref = FirebaseFirestore.instance
@@ -119,8 +125,17 @@ Future<String> uploadAssignmentOnFirebaseStorage(String postId,
 }
 
 void deleteAssignment(String classId,String assignmentId) {
-  final ref = FirebaseFirestore.instance.collection('assignments')
+  final ref = _firestoreInst.collection('assignments')
       .doc(classId)
       .collection('allAssignments').doc(assignmentId);
   ref.delete();
+}
+
+void editClassroomDetails(String uid,String classId,String section,String name,String subject){
+  final ref = _firestoreInst.collection('classesCreated').doc(uid).collection('allClasses').doc(classId);
+  ref.update({
+    'name': name,
+    'subject': subject,
+    'section': section,
+  });
 }

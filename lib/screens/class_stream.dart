@@ -1,3 +1,4 @@
+import 'package:collage_classroom/widgets/edit_class.dart';
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:collage_classroom/widgets/share_assignment_to_class.dart';
@@ -33,7 +34,9 @@ class ClassStreamScreen extends StatelessWidget{
               Icons.settings,
               color: Colors.black54,
             ),
-            onPressed: () {},
+            onPressed: () {
+              buildEditClass(context,classId,className,section,subject);
+            },
           )
               : IconButton(
             icon: const Icon(

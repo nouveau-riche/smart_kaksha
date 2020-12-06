@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+import '../utility/google_signin.dart';
+
 Widget buildDrawerContent(BuildContext context) {
   return Column(
     crossAxisAlignment: CrossAxisAlignment.start,
@@ -44,6 +46,15 @@ Widget buildDrawerContent(BuildContext context) {
         icon: Icon(Icons.calendar_today),
         label: Text('Help'),
         onPressed: () {},
+      ),
+      FlatButton.icon(
+        icon: Icon(Icons.call_missed),
+        label: Text('Logout'),
+        onPressed: () {
+          signOutGoogle();
+          Navigator.of(context).pushNamedAndRemoveUntil(
+              './authentication_screen', (route) => false);
+        },
       ),
     ],
   );

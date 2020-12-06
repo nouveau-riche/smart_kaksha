@@ -51,7 +51,6 @@ class _ClassDetailState extends State<ClassDetail> {
 
   @override
   Widget build(BuildContext context) {
-    final mq = MediaQuery.of(context).size;
     return Scaffold(
       body: Stack(
         children: [
@@ -72,7 +71,7 @@ class _ClassDetailState extends State<ClassDetail> {
         items: [
           const BottomNavigationBarItem(
             icon: const Icon(Icons.assignment),
-            title: Text('Stream')
+            title: const Text('Stream')
           ),
           const BottomNavigationBarItem(
             icon: const Icon(Icons.people),

@@ -4,7 +4,6 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 
 import '../widgets/display_class.dart';
 import '../widgets/drawer.dart';
-import '../utility/google_signin.dart';
 import '../widgets/create_or_join_classroom.dart';
 
 class HomePage extends StatefulWidget {
@@ -39,20 +38,13 @@ class _HomePageState extends State<HomePage> {
         centerTitle: true,
         actions: [
           Padding(
-            padding: const EdgeInsets.all(10),
-            child: GestureDetector(
-              onTap: () {
-                signOutGoogle();
-                Navigator.of(context).pushNamedAndRemoveUntil(
-                    './authentication_screen', (route) => false);
-              },
-              child: CircleAvatar(
-                radius: 20,
-                backgroundColor: Colors.grey,
-                backgroundImage: NetworkImage(imageUrl),
-              ),
+            padding: EdgeInsets.all(10),
+            child: CircleAvatar(
+              radius: 18,
+              backgroundColor: Colors.grey,
+              backgroundImage: NetworkImage(imageUrl),
             ),
-          )
+          ),
         ],
       ),
       drawer: Drawer(
