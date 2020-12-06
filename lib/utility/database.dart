@@ -96,6 +96,7 @@ void updateAssignmentInClass(String uid, String classId, String assignmentName,
       .collection('allAssignments')
       .doc();
   ref.set({
+    'assignmentId': ref.id,
     'uid': uid,
     'assignmentName': assignmentName,
     'url': url,

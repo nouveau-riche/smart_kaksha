@@ -137,7 +137,7 @@ class ClassStreamScreen extends StatelessWidget{
                 itemCount: allAssignment.length),
           );
         } else {
-          return Text('nikunj');
+          return const CircularProgressIndicator();
         }
       },
     );
