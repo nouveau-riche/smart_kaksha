@@ -35,17 +35,17 @@ showUnEnrolAlert(BuildContext context, String classId) {
       builder: (ctx) => AlertDialog(
             shape:
                 RoundedRectangleBorder(borderRadius: BorderRadius.circular(14)),
-            title: Text(
+            title: const Text(
               'Unerol',
               style: TextStyle(fontWeight: FontWeight.w500),
             ),
-            content: Text(
+            content: const Text(
               "By doing this, you'll no longer be able to see the class or participate in it.",
               style: TextStyle(color: Colors.black87),
             ),
             actions: [
               FlatButton(
-                child: Text(
+                child: const Text(
                   'CANCEL',
                   style: TextStyle(fontWeight: FontWeight.w500),
                 ),
@@ -54,7 +54,7 @@ showUnEnrolAlert(BuildContext context, String classId) {
                 },
               ),
               FlatButton(
-                child: Text(
+                child: const Text(
                   'UNENROL',
                   style: TextStyle(fontWeight: FontWeight.w500),
                 ),

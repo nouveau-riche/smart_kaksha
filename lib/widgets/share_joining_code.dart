@@ -16,7 +16,7 @@ Future<Widget> showShareInvitationBottomSheet(BuildContext context,String classI
               const SizedBox(height: 5,),
               FlatButton.icon(
                 icon: Icon(Icons.share,color:Colors.blue),
-                label: Text(
+                label: const Text(
                   'Share Invitation',
                   style: const TextStyle(fontSize: 19),
                 ),
@@ -27,7 +27,7 @@ Future<Widget> showShareInvitationBottomSheet(BuildContext context,String classI
               ),
               FlatButton.icon(
                 icon: Icon(Icons.delete,color: Colors.redAccent,),
-                label: Text(
+                label: const Text(
                   'Delete Class',
                   style: const TextStyle(fontSize: 19),
                 ),
@@ -50,11 +50,11 @@ showDeleteAlert(BuildContext context, String classId) {
       builder: (ctx) => AlertDialog(
         shape:
         RoundedRectangleBorder(borderRadius: BorderRadius.circular(14)),
-        title: Text(
+        title: const Text(
           'Delete Class',
           style: TextStyle(fontWeight: FontWeight.w500),
         ),
-        content: Text(
+        content: const Text(
           "By doing this, you'll no longer be\nable to see the class or participate\nin it.",
           style: TextStyle(color: Colors.black87),
         ),

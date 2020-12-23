@@ -19,7 +19,7 @@ Future<Widget> buildJoinClass(BuildContext context) async {
               children: [
                 buildAppBar(context),
                 Container(
-                  margin: EdgeInsets.symmetric(vertical: 15),
+                  margin: const EdgeInsets.symmetric(vertical: 15),
                   child: const Text(
                     'Ask your teacher for the class code, then\nenter it here.',
                     style: const TextStyle(
@@ -33,61 +33,53 @@ Future<Widget> buildJoinClass(BuildContext context) async {
 }
 
 Widget buildAppBar(BuildContext context) {
-  return Card(
-      elevation: 6,
-      shape: const RoundedRectangleBorder(
-          borderRadius: const BorderRadius.only(
-              topLeft: const Radius.circular(15),
-              topRight: const Radius.circular(18))),
-      child: Container(
-        padding: const EdgeInsets.all(6),
-        decoration: BoxDecoration(borderRadius: BorderRadius.circular(18)),
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: [
-            IconButton(
-              icon: const Icon(Icons.clear),
-              onPressed: () {
-                Navigator.of(context).pop();
-                Navigator.of(context).pop();
-              },
-            ),
-            const Text(
-              'Join class',
-              style: const TextStyle(fontSize: 18),
-            ),
-            FlatButton(
-              child: const Text(
-                'Join',
-                style: const TextStyle(fontSize: 16),
-              ),
-              onPressed: isClassCodeValid == false
-                  ? null
-                  : () async {
-                      User user = FirebaseAuth.instance.currentUser;
-
-                      DocumentSnapshot snapshot = await FirebaseFirestore
-                          .instance
-                          .collection('singleClass')
-                          .doc(_codeController.text)
-                          .get();
-                      joinClassOnFirebase(
-                          _codeController.text,
-                          snapshot.data()['name'],
-                          snapshot.data()['section'],
-                          snapshot.data()['subject'],
-                          user.uid,
-                          user.displayName,
-                          snapshot.data()['photoUrl'],
-                          user.photoURL);
-                      Navigator.of(context).pop();
-                      Navigator.of(context).pop();
-                      _codeController.clear();
-                    },
-            )
-          ],
+  return AppBar(
+    backgroundColor: Colors.white,
+    shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.only(
+            topLeft: Radius.circular(15), topRight: Radius.circular(15))),
+    centerTitle: true,
+    leading: IconButton(
+      icon: const Icon(Icons.clear),
+      onPressed: () {
+        Navigator.of(context).pop();
+        Navigator.of(context).pop();
+      },
+    ),
+    title: const Text(
+      'Join class',
+      style: const TextStyle(fontSize: 18, color: Colors.black),
+    ),
+    actions: [
+      FlatButton(
+        child: const Text(
+          'Join',
+          style: const TextStyle(fontSize: 16),
         ),
-      ));
+        onPressed: isClassCodeValid == false
+            ? null
+            : () async {
+                User user = FirebaseAuth.instance.currentUser;
+                DocumentSnapshot snapshot = await FirebaseFirestore.instance
+                    .collection('singleClass')
+                    .doc(_codeController.text)
+                    .get();
+                joinClassOnFirebase(
+                    _codeController.text,
+                    snapshot.data()['name'],
+                    snapshot.data()['section'],
+                    snapshot.data()['subject'],
+                    user.uid,
+                    user.displayName,
+                    snapshot.data()['photoUrl'],
+                    user.photoURL);
+                Navigator.of(context).pop();
+                Navigator.of(context).pop();
+                _codeController.clear();
+              },
+      )
+    ],
+  );
 }
 
 Widget buildClassCodeField(double width) {
