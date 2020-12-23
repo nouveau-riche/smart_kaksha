@@ -22,6 +22,7 @@ Future<Widget> buildCreateClass(BuildContext context) async {
             child: Column(
               children: [
                 buildAppBar(context),
+                //buildApbar(context),
                 buildClassNameField(mq.width * 0.9),
                 buildSecNameField(mq.width * 0.9),
                 buildSubjectNameField(mq.width * 0.9),
@@ -30,58 +31,48 @@ Future<Widget> buildCreateClass(BuildContext context) async {
           ));
 }
 
+
+
 Widget buildAppBar(BuildContext context) {
-  return Card(
-    elevation: 6,
-    shape: const RoundedRectangleBorder(
+  return AppBar(
+    backgroundColor: Colors.white,
+    shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.only(
-            topLeft: Radius.circular(15), topRight: Radius.circular(18))),
-    child: Container(
-      padding: const EdgeInsets.all(6),
-      decoration: BoxDecoration(borderRadius: BorderRadius.circular(18)),
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        children: [
-          IconButton(
-            icon: const Icon(Icons.clear),
-            onPressed: () {
-              Navigator.of(context).pop();
-              Navigator.of(context).pop();
-            },
-          ),
-          const Text(
-            'Create class',
-            style: const TextStyle(fontSize: 18),
-          ),
-          FlatButton(
-            child: const Text(
-              'Create',
-              style: const TextStyle(fontSize: 16),
-            ),
-            onPressed: isSubjectNameValid == false ||
-                    isClassNameValid == false ||
-                    isSectionNameValid == false
-                ? null
-                : () {
-                    User user = FirebaseAuth.instance.currentUser;
-                    createClassOnFirebase(
-                        user.uid,
-                        _className.text,
-                        _secName.text,
-                        _subjectName.text,
-                        user.displayName,
-                        user.photoURL,
-                        true);
-                    Navigator.of(context).pop();
-                    Navigator.of(context).pop();
-                    _className.clear();
-                    _secName.clear();
-                    _subjectName.clear();
-                  },
-          )
-        ],
-      ),
+            topLeft: Radius.circular(15), topRight: Radius.circular(15))),
+    centerTitle: true,
+    leading: IconButton(
+      icon: const Icon(Icons.clear,color: Colors.black,),
+      onPressed: () {
+        Navigator.of(context).pop();
+        Navigator.of(context).pop();
+      },
     ),
+    title: const Text(
+      'Create class',
+      style: const TextStyle(fontSize: 18,color: Colors.black),
+    ),
+    actions: [
+      FlatButton(
+        child: const Text(
+          'Create',
+          style: const TextStyle(fontSize: 16),
+        ),
+        onPressed: isSubjectNameValid == false ||
+                isClassNameValid == false ||
+                isSectionNameValid == false
+            ? null
+            : () {
+                User user = FirebaseAuth.instance.currentUser;
+                createClassOnFirebase(user.uid, _className.text, _secName.text,
+                    _subjectName.text, user.displayName, user.photoURL, true);
+                Navigator.of(context).pop();
+                Navigator.of(context).pop();
+                _className.clear();
+                _secName.clear();
+                _subjectName.clear();
+              },
+      )
+    ],
   );
 }
 

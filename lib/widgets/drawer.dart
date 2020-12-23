@@ -7,7 +7,7 @@ Widget buildDrawerContent(BuildContext context) {
     crossAxisAlignment: CrossAxisAlignment.start,
     children: [
       Padding(
-        padding: EdgeInsets.symmetric(horizontal: 10, vertical: 18),
+        padding: EdgeInsets.only(top: 32,left: 20),
         child: Text(
           'Collage Classroom',
           style: const TextStyle(fontSize: 24, fontWeight: FontWeight.w500),
@@ -16,45 +16,44 @@ Widget buildDrawerContent(BuildContext context) {
       Divider(
         color: Colors.grey,
       ),
-      FlatButton.icon(
-        icon: Icon(Icons.home),
-        label: Text('Classes'),
-        onPressed: () {
-          Navigator.of(context)
-              .pushNamedAndRemoveUntil('/home-page', (route) => false);
-        },
+      Padding(
+        padding: EdgeInsets.only(left: 8),
+        child: FlatButton.icon(
+          icon: Icon(Icons.school),
+          label: Text('Classes'),
+          onPressed: () {
+            Navigator.of(context)
+                .pushNamedAndRemoveUntil('/home-page', (route) => false);
+          },
+        ),
       ),
-      FlatButton.icon(
-        icon: Icon(Icons.calendar_today),
-        label: Text('Calendar'),
-        onPressed: () {},
+      Padding(
+        padding: EdgeInsets.only(left: 8),
+        child: FlatButton.icon(
+          icon: Icon(Icons.settings),
+          label: Text('Settings'),
+          onPressed: () {},
+        ),
       ),
-      Divider(
-        color: Colors.grey,
+      Padding(
+        padding: EdgeInsets.only(left: 8),
+        child: FlatButton.icon(
+          icon: Icon(Icons.help),
+          label: Text('Help',),
+          onPressed: () {},
+        ),
       ),
-      FlatButton.icon(
-        icon: Icon(Icons.calendar_today),
-        label: Text('Classroom folders'),
-        onPressed: () {},
-      ),
-      FlatButton.icon(
-        icon: Icon(Icons.calendar_today),
-        label: Text('Settings'),
-        onPressed: () {},
-      ),
-      FlatButton.icon(
-        icon: Icon(Icons.calendar_today),
-        label: Text('Help'),
-        onPressed: () {},
-      ),
-      FlatButton.icon(
-        icon: Icon(Icons.call_missed),
-        label: Text('Logout'),
-        onPressed: () {
-          signOutGoogle();
-          Navigator.of(context).pushNamedAndRemoveUntil(
-              './authentication_screen', (route) => false);
-        },
+      Padding(
+        padding: EdgeInsets.only(left: 8),
+        child: FlatButton.icon(
+          icon: Icon(Icons.exit_to_app),
+          label: Text('Logout'),
+          onPressed: () {
+            signOutGoogle();
+            Navigator.of(context).pushNamedAndRemoveUntil(
+                './authentication_screen', (route) => false);
+          },
+        ),
       ),
     ],
   );

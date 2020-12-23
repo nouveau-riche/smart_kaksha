@@ -82,9 +82,9 @@ Widget buildClass(BuildContext context,
               Text(
                 section,
                 style: const TextStyle(
-                    fontSize: 21,
+                    fontSize: 19,
                     color: Colors.white,
-                    fontWeight: FontWeight.bold),
+                    fontWeight: FontWeight.w500),
               ),
             ],
           ),

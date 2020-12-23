@@ -47,50 +47,44 @@ Future<Widget> buildShareAssignment(
 
 Widget buildAppbar(BuildContext context, String uid, String classId,
     String studentName, String photoUrl, bool isInstructor) {
-  return Card(
-    elevation: 6,
-    shape: const RoundedRectangleBorder(
-        borderRadius: const BorderRadius.only(
-            topLeft: const Radius.circular(15),
-            topRight: const Radius.circular(15))),
-    child: Container(
-      padding: const EdgeInsets.all(10),
-      decoration: BoxDecoration(borderRadius: BorderRadius.circular(15)),
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        children: [
-          IconButton(
-            icon: const Icon(Icons.clear),
-            onPressed: () {
-              Navigator.of(context).pop();
-              postId = Uuid().v4();
-              _assignmentController.clear();
-              file = null;
-            },
-          ),
-          RaisedButton(
-            color: Colors.blue,
-            child: const Text(
-              'Post',
-              style: const TextStyle(fontSize: 16),
-            ),
-            onPressed: () async {
-              Navigator.of(context).pop();
-              if (file == null) {
-                return;
-              }
-              String downloadUrl =
-                  await uploadAssignmentOnFirebaseStorage(postId, file);
-
-              updateAssignmentInClass(uid, classId, _assignmentController.text,
-                  downloadUrl, studentName, photoUrl, isInstructor);
-              postId = Uuid().v4();
-              _assignmentController.clear();
-            },
-          ),
-        ],
-      ),
+  return AppBar(
+    backgroundColor: Colors.white,
+    shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.only(
+            topLeft: Radius.circular(15), topRight: Radius.circular(15))),
+    centerTitle: true,
+    leading: IconButton(
+      icon: const Icon(Icons.clear,color: Colors.black,),
+      onPressed: () {
+        Navigator.of(context).pop();
+        postId = Uuid().v4();
+        _assignmentController.clear();
+        file = null;
+      },
     ),
+
+    actions: [
+      FlatButton(
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(15)),
+        child: const Text(
+          'Post',
+          style: const TextStyle(fontSize: 16),
+        ),
+        onPressed: () async {
+          Navigator.of(context).pop();
+          if (file == null) {
+            return;
+          }
+          String downloadUrl =
+              await uploadAssignmentOnFirebaseStorage(postId, file);
+
+          updateAssignmentInClass(uid, classId, _assignmentController.text,
+              downloadUrl, studentName, photoUrl, isInstructor);
+          postId = Uuid().v4();
+          _assignmentController.clear();
+        },
+      ),
+    ],
   );
 }
 

@@ -40,7 +40,7 @@ class ClassStreamScreen extends StatelessWidget{
           )
               : IconButton(
             icon: const Icon(
-              Icons.description,
+              Icons.info_outline,
               color: Colors.black54,
             ),
             onPressed: () {

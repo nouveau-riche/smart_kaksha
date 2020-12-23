@@ -15,7 +15,7 @@ Future<Widget> showUnEnrolBottomSheet(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 FlatButton(
-                  child: Text(
+                  child: const Text(
                     'Unenroll',
                     style: const TextStyle(fontSize: 19),
                   ),
@@ -40,7 +40,7 @@ showUnEnrolAlert(BuildContext context, String classId) {
               style: TextStyle(fontWeight: FontWeight.w500),
             ),
             content: Text(
-              "By doing this, you'll no longer be\nable to see the class or participate\nin it.",
+              "By doing this, you'll no longer be able to see the class or participate in it.",
               style: TextStyle(color: Colors.black87),
             ),
             actions: [

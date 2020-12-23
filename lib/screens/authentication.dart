@@ -43,19 +43,15 @@ class Authentication extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 mainAxisSize: MainAxisSize.min,
                 children: [
-                  const Text(
-                    'Classroom helps classes communicate, save time',
-                    style: const TextStyle(
-                        fontSize: 16,
-                        color: Colors.white,
-                        fontWeight: FontWeight.w400),
-                  ),
-                  const Text(
-                    'and stay organised.',
-                    style: const TextStyle(
-                        fontSize: 16,
-                        color: Colors.white,
-                        fontWeight: FontWeight.w400),
+                  Padding(
+                    padding: EdgeInsets.all(2),
+                    child: const Text(
+                      'Classroom helps classes communicate, save time and stay organised.',
+                      style: const TextStyle(
+                          fontSize: 16,
+                          color: Colors.white,
+                          fontWeight: FontWeight.w400),
+                    ),
                   ),
                 ],
               ),
@@ -81,9 +77,10 @@ class Authentication extends StatelessWidget {
             height: mq.height * 0.25,
           ),
           Container(
+            padding: EdgeInsets.all(2),
             height: mq.height * 0.1,
             child: const Text(
-              'By joining you agree to share contact information with\npeople in your class.',
+              'By joining you agree to share contact information with people in your class.',
               style: const TextStyle(fontSize: 15, color: Colors.white),
             ),
           )
