@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+import '../screens/settings.dart';
 import '../utility/google_signin.dart';
 
 Widget buildDrawerContent(BuildContext context) {
@@ -32,7 +33,9 @@ Widget buildDrawerContent(BuildContext context) {
         child: FlatButton.icon(
           icon: const Icon(Icons.settings),
           label: const Text('Settings'),
-          onPressed: () {},
+          onPressed: () {
+            Navigator.of(context).push(MaterialPageRoute(builder: (ctx) => Settings()));
+          },
         ),
       ),
       Padding(

@@ -109,7 +109,7 @@ class _BottomSheetContentState extends State<BottomSheetContent> {
               color: Colors.green,
             ),
             child: Center(
-              child: Text(
+              child: const Text(
                 'Post',
                 style: const TextStyle(fontSize: 16),
               ),
