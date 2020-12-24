@@ -6,14 +6,20 @@ final _fireStoreInst = FirebaseFirestore.instance;
 final _firebaseStorage = FirebaseStorage.instance;
 
 void saveUserInfoToFireStore(
-    String uid, String name, String imageURL, String email) {
+    {String uid, String name, String imageURL, String email}) {
   final ref = _fireStoreInst.collection('users').doc(uid);
 
   ref.set({'id': uid, 'name': name, 'email': email, 'imageURL': imageURL});
 }
 
-void createClassOnFirebase(String uid, String name, String section,
-    String subject, String instructor, String instructorPhotoUrl, bool isInst) {
+void createClassOnFirebase(
+    {String uid,
+    String name,
+    String section,
+    String subject,
+    String instructor,
+    String instructorPhotoUrl,
+    bool isInst}) {
   final ref1 = _fireStoreInst
       .collection('classesCreated')
       .doc(uid)
@@ -45,14 +51,14 @@ void createClassOnFirebase(String uid, String name, String section,
 }
 
 void joinClassOnFirebase(
-    String classId,
+    {String classId,
     String name,
     String section,
     String subject,
     String studentUID,
     String studentName,
     String instructorPhotoUrl,
-    String imageUrl) {
+    String imageUrl}) {
   final ref = _fireStoreInst
       .collection('classesCreated')
       .doc(studentUID)
@@ -77,7 +83,7 @@ void joinClassOnFirebase(
   });
 }
 
-void unEnrolFromJoinedClass(String uid, String classId) {
+void unEnrolFromJoinedClass({String uid, String classId}) {
   final ref = _fireStoreInst
       .collection('classesCreated')
       .doc(uid)
@@ -86,7 +92,7 @@ void unEnrolFromJoinedClass(String uid, String classId) {
   ref.delete();
 }
 
-void deleteCreatedClass(String uid, String classId) {
+void deleteCreatedClass({String uid, String classId}) {
   final ref = _fireStoreInst
       .collection('classesCreated')
       .doc(uid)
@@ -95,8 +101,14 @@ void deleteCreatedClass(String uid, String classId) {
   ref.delete();
 }
 
-void updateAssignmentInClass(String uid, String classId, String assignmentName,
-    String url, String studentName, String studentPhotoUrl, bool isInstructor) {
+void updateAssignmentInClass(
+    {String uid,
+    String classId,
+    String assignmentName,
+    String url,
+    String studentName,
+    String studentPhotoUrl,
+    bool isInstructor}) {
   final ref = FirebaseFirestore.instance
       .collection('assignments')
       .doc(classId)
@@ -114,17 +126,8 @@ void updateAssignmentInClass(String uid, String classId, String assignmentName,
   });
 }
 
-void fetchClasses(String uid) async {
-  final ref = _fireStoreInst
-      .collection('classesCreated')
-      .doc(uid)
-      .collection('allClasses');
-  QuerySnapshot snapshot =
-      await ref.orderBy('timestamp', descending: true).get();
-}
-
 Future<String> uploadAssignmentOnFirebaseStorage(
-    String postId, File file) async {
+    {String postId, File file}) async {
   final ref = _firebaseStorage.ref().child('documents');
   StorageUploadTask storageUploadTask = ref.child(postId).putFile(file);
   StorageTaskSnapshot storageTaskSnapshot = await storageUploadTask.onComplete;
@@ -132,7 +135,7 @@ Future<String> uploadAssignmentOnFirebaseStorage(
   return downloadUrl;
 }
 
-void deleteAssignment(String classId, String assignmentId) {
+void deleteAssignment({String classId, String assignmentId}) {
   final ref = _fireStoreInst
       .collection('assignments')
       .doc(classId)
@@ -142,7 +145,7 @@ void deleteAssignment(String classId, String assignmentId) {
 }
 
 void editClassroomDetails(
-    String uid, String classId, String section, String name, String subject) {
+    {String uid, String classId, String section, String name, String subject}) {
   final ref = _fireStoreInst
       .collection('classesCreated')
       .doc(uid)

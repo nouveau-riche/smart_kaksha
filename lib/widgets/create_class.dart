@@ -65,8 +65,14 @@ Widget buildAppBar(BuildContext context) {
             ? null
             : () {
                 User user = FirebaseAuth.instance.currentUser;
-                createClassOnFirebase(user.uid, _className.text, _secName.text,
-                    _subjectName.text, user.displayName, user.photoURL, true);
+                createClassOnFirebase(
+                    uid: user.uid,
+                    name: _className.text,
+                    section: _secName.text,
+                    subject: _subjectName.text,
+                    instructor: user.displayName,
+                    instructorPhotoUrl: user.photoURL,
+                    isInst: true);
                 Navigator.of(context).pop();
                 Navigator.of(context).pop();
                 _className.clear();

@@ -67,14 +67,14 @@ Widget buildAppBar(BuildContext context) {
                     .doc(_codeController.text)
                     .get();
                 joinClassOnFirebase(
-                    _codeController.text,
-                    snapshot.data()['name'],
-                    snapshot.data()['section'],
-                    snapshot.data()['subject'],
-                    user.uid,
-                    user.displayName,
-                    snapshot.data()['photoUrl'],
-                    user.photoURL);
+                    classId: _codeController.text,
+                    name: snapshot.data()['name'],
+                    section: snapshot.data()['section'],
+                    subject: snapshot.data()['subject'],
+                    studentUID: user.uid,
+                    studentName: user.displayName,
+                    instructorPhotoUrl: snapshot.data()['photoUrl'],
+                    imageUrl: user.photoURL);
                 Navigator.of(context).pop();
                 Navigator.of(context).pop();
                 _codeController.clear();

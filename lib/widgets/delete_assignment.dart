@@ -59,7 +59,8 @@ showDeleteAlert(BuildContext context, String classId, String assignmentId) {
                       fontWeight: FontWeight.w500, color: Colors.redAccent),
                 ),
                 onPressed: () {
-                  deleteAssignment(classId, assignmentId);
+                  deleteAssignment(
+                      classId: classId, assignmentId: assignmentId);
                   Navigator.of(context).pop();
                 },
               ),

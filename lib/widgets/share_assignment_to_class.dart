@@ -77,11 +77,17 @@ Widget buildAppbar(BuildContext context, String uid, String classId,
           if (file == null) {
             return;
           }
-          String downloadUrl =
-              await uploadAssignmentOnFirebaseStorage(postId, file);
+          String downloadUrl = await uploadAssignmentOnFirebaseStorage(
+              postId: postId, file: file);
 
-          updateAssignmentInClass(uid, classId, _assignmentController.text,
-              downloadUrl, studentName, photoUrl, isInstructor);
+          updateAssignmentInClass(
+              uid: uid,
+              classId: classId,
+              assignmentName: _assignmentController.text,
+              url: downloadUrl,
+              studentName: studentName,
+              studentPhotoUrl: photoUrl,
+              isInstructor: isInstructor);
           postId = Uuid().v4();
           _assignmentController.clear();
         },

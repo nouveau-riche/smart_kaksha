@@ -82,7 +82,7 @@ showDeleteAlert(BuildContext context, String classId) {
                 ),
                 onPressed: () {
                   User user = FirebaseAuth.instance.currentUser;
-                  deleteCreatedClass(user.uid, classId);
+                  deleteCreatedClass(uid: user.uid, classId: classId);
                   Navigator.of(context).pop();
                 },
               ),

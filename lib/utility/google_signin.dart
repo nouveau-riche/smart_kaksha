@@ -49,7 +49,8 @@ Future<String> signInWithGoogle(BuildContext context) async {
   imageUrl = user.photoURL;
 
   if (user.uid != null) {
-    saveUserInfoToFireStore(user.uid, name, imageUrl, email);
+    saveUserInfoToFireStore(
+        uid: user.uid, name: name, imageURL: imageUrl, email: email);
     Navigator.of(context).push(MaterialPageRoute(builder: (ctx) => HomePage()));
   }
 

@@ -60,7 +60,7 @@ showUnEnrolAlert(BuildContext context, String classId) {
                 ),
                 onPressed: () {
                   User user = FirebaseAuth.instance.currentUser;
-                  unEnrolFromJoinedClass(user.uid, classId);
+                  unEnrolFromJoinedClass(uid: user.uid, classId: classId);
                   Navigator.of(context).pop();
                 },
               ),

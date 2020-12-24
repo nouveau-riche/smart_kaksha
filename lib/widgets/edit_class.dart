@@ -9,7 +9,6 @@ TextEditingController _subjectName;
 
 Future<Widget> buildEditClass(BuildContext context, String classId,
     String className, String section, String subject) async {
-
   _className = TextEditingController(text: className);
   _secName = TextEditingController(text: section);
   _subjectName = TextEditingController(text: subject);
@@ -62,8 +61,12 @@ Widget buildAppBar(BuildContext context, String classId) {
             ),
             onPressed: () {
               User user = FirebaseAuth.instance.currentUser;
-              editClassroomDetails(user.uid, classId, _secName.text,
-                  _className.text, _subjectName.text);
+              editClassroomDetails(
+                  uid: user.uid,
+                  classId: classId,
+                  section: _secName.text,
+                  name: _className.text,
+                  subject: _subjectName.text);
               Navigator.of(context).pop();
               Navigator.of(context).pop();
             },
