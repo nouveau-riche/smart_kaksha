@@ -62,8 +62,8 @@ class _BottomSheetContentState extends State<BottomSheetContent> {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        buildAppbar(
-            context, widget.uid, widget.classId, widget.studentName, widget.studentPhotoUrl, widget.isInstructor),
+        buildAppbar(context, widget.uid, widget.classId, widget.studentName,
+            widget.studentPhotoUrl, widget.isInstructor),
         buildAddAttachment(),
         const Divider(
           color: Colors.black54,
@@ -101,9 +101,19 @@ class _BottomSheetContentState extends State<BottomSheetContent> {
         FlatButton(
           shape:
               RoundedRectangleBorder(borderRadius: BorderRadius.circular(15)),
-          child: const Text(
-            'Post',
-            style: const TextStyle(fontSize: 16),
+          child: Container(
+            height: 27,
+            width: 58,
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(3.5),
+              color: Colors.green,
+            ),
+            child: Center(
+              child: Text(
+                'Post',
+                style: const TextStyle(fontSize: 16),
+              ),
+            ),
           ),
           onPressed: () async {
             Navigator.of(context).pop();
