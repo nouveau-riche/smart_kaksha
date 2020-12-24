@@ -16,13 +16,14 @@ Future<Widget> buildCreateClass(BuildContext context) async {
   return await showModalBottomSheet(
       isScrollControlled: true,
       context: context,
-      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(18)),
+      shape: const RoundedRectangleBorder(
+          borderRadius: BorderRadius.only(
+              topLeft: Radius.circular(18), topRight: Radius.circular(18))),
       builder: (ctx) => Container(
             height: mq.height * 0.8,
             child: Column(
               children: [
                 buildAppBar(context),
-                //buildApbar(context),
                 buildClassNameField(mq.width * 0.9),
                 buildSecNameField(mq.width * 0.9),
                 buildSubjectNameField(mq.width * 0.9),
@@ -31,17 +32,18 @@ Future<Widget> buildCreateClass(BuildContext context) async {
           ));
 }
 
-
-
 Widget buildAppBar(BuildContext context) {
   return AppBar(
     backgroundColor: Colors.white,
-    shape: RoundedRectangleBorder(
+    shape: const RoundedRectangleBorder(
         borderRadius: BorderRadius.only(
             topLeft: Radius.circular(15), topRight: Radius.circular(15))),
     centerTitle: true,
     leading: IconButton(
-      icon: const Icon(Icons.clear,color: Colors.black,),
+      icon: const Icon(
+        Icons.clear,
+        color: Colors.black,
+      ),
       onPressed: () {
         Navigator.of(context).pop();
         Navigator.of(context).pop();
@@ -49,7 +51,7 @@ Widget buildAppBar(BuildContext context) {
     ),
     title: const Text(
       'Create class',
-      style: const TextStyle(fontSize: 18,color: Colors.black),
+      style: const TextStyle(fontSize: 18, color: Colors.black),
     ),
     actions: [
       FlatButton(

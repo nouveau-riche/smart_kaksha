@@ -7,8 +7,8 @@ Widget buildDrawerContent(BuildContext context) {
     crossAxisAlignment: CrossAxisAlignment.start,
     children: [
       Padding(
-        padding: EdgeInsets.only(top: 32,left: 20),
-        child: Text(
+        padding: const EdgeInsets.only(top: 32, left: 20),
+        child: const Text(
           'Collage Classroom',
           style: const TextStyle(fontSize: 24, fontWeight: FontWeight.w500),
         ),
@@ -17,10 +17,10 @@ Widget buildDrawerContent(BuildContext context) {
         color: Colors.grey,
       ),
       Padding(
-        padding: EdgeInsets.only(left: 8),
+        padding: const EdgeInsets.only(left: 8),
         child: FlatButton.icon(
-          icon: Icon(Icons.school),
-          label: Text('Classes'),
+          icon: const Icon(Icons.school),
+          label: const Text('Classes'),
           onPressed: () {
             Navigator.of(context)
                 .pushNamedAndRemoveUntil('/home-page', (route) => false);
@@ -28,26 +28,28 @@ Widget buildDrawerContent(BuildContext context) {
         ),
       ),
       Padding(
-        padding: EdgeInsets.only(left: 8),
+        padding: const EdgeInsets.only(left: 8),
         child: FlatButton.icon(
-          icon: Icon(Icons.settings),
-          label: Text('Settings'),
+          icon: const Icon(Icons.settings),
+          label: const Text('Settings'),
           onPressed: () {},
         ),
       ),
       Padding(
-        padding: EdgeInsets.only(left: 8),
+        padding: const EdgeInsets.only(left: 8),
         child: FlatButton.icon(
-          icon: Icon(Icons.help),
-          label: Text('Help',),
+          icon: const Icon(Icons.help),
+          label: const Text(
+            'Help',
+          ),
           onPressed: () {},
         ),
       ),
       Padding(
-        padding: EdgeInsets.only(left: 8),
+        padding: const EdgeInsets.only(left: 8),
         child: FlatButton.icon(
-          icon: Icon(Icons.exit_to_app),
-          label: Text('Logout'),
+          icon: const Icon(Icons.exit_to_app),
+          label: const Text('Logout'),
           onPressed: () {
             signOutGoogle();
             Navigator.of(context).pushNamedAndRemoveUntil(

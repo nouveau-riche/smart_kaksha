@@ -5,7 +5,7 @@ import './join_class.dart';
 
 buildBottomSheet(BuildContext context) async {
   return await showModalBottomSheet(
-      shape: RoundedRectangleBorder(
+      shape: const RoundedRectangleBorder(
           borderRadius: BorderRadius.only(
               topLeft: Radius.circular(2), topRight: Radius.circular(2))),
       context: context,
@@ -14,7 +14,7 @@ buildBottomSheet(BuildContext context) async {
               mainAxisSize: MainAxisSize.min,
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                SizedBox(height: 5),
+                const SizedBox(height: 5),
                 FlatButton(
                   child: const Text(
                     'Create Class',
@@ -33,7 +33,7 @@ buildBottomSheet(BuildContext context) async {
                     buildJoinClass(context);
                   },
                 ),
-                SizedBox(
+                const SizedBox(
                   height: 14,
                 )
               ],

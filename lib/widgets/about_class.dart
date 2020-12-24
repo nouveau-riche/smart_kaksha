@@ -3,10 +3,13 @@ import 'package:flutter/material.dart';
 Future<Widget> showAboutClassBottomSheet(BuildContext context, String className,
     String sectionName, String subject) async {
   final mq = MediaQuery.of(context).size;
+
   return await showModalBottomSheet(
       isScrollControlled: true,
       context: context,
-      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
+      shape: const RoundedRectangleBorder(
+          borderRadius: BorderRadius.only(
+              topRight: Radius.circular(10), topLeft: Radius.circular(10))),
       builder: (ctx) => Container(
             height: mq.height * 0.8,
             child: Column(
@@ -29,29 +32,29 @@ Future<Widget> showAboutClassBottomSheet(BuildContext context, String className,
                             fontWeight: FontWeight.bold,
                             color: Colors.blue),
                       ),
-                      SizedBox(height: 5),
+                      const SizedBox(height: 5),
                       Text(
                         sectionName,
-                        style: TextStyle(
+                        style: const TextStyle(
                             fontSize: 18, fontWeight: FontWeight.bold),
                       ),
-                      SizedBox(
+                      const SizedBox(
                         height: 12,
                       ),
                       Column(
                         mainAxisSize: MainAxisSize.min,
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          Text(
+                          const Text(
                             'SUBJECT',
-                            style: TextStyle(
+                            style: const TextStyle(
                                 color: Colors.black87,
                                 fontSize: 15,
                                 fontWeight: FontWeight.w500),
                           ),
                           Text(
                             subject,
-                            style: TextStyle(
+                            style: const TextStyle(
                                 fontSize: 17, fontWeight: FontWeight.bold),
                           ),
                         ],
@@ -71,15 +74,15 @@ Widget buildAppBar(BuildContext context) {
     child: Row(
       children: [
         IconButton(
-          icon: const Icon(Icons.clear,color: Colors.black54),
+          icon: const Icon(Icons.clear, color: Colors.black54),
           onPressed: () {
             Navigator.of(context).pop();
           },
         ),
         SizedBox(width: 90),
-        Text(
+        const Text(
           'About',
-          style: TextStyle(color: Colors.black87),
+          style: const TextStyle(color: Colors.black87),
         ),
       ],
     ),

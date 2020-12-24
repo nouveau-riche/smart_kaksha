@@ -16,7 +16,10 @@ class PeopleInClass extends StatelessWidget {
         elevation: 0,
         backgroundColor: Colors.white,
         iconTheme: const IconThemeData(color: Colors.black),
-        title: Text(className,style: const TextStyle(color: Colors.black87),),
+        title: Text(
+          className,
+          style: const TextStyle(color: Colors.black87),
+        ),
       ),
       drawer: Drawer(
         child: buildDrawerContent(context),
@@ -87,7 +90,7 @@ class PeopleInClass extends StatelessWidget {
             backgroundColor: Colors.blue,
             backgroundImage: NetworkImage(photoUrl),
           ),
-          SizedBox(width: 14),
+          const SizedBox(width: 14),
           Text(
             name,
             style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 16),

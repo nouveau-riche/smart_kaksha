@@ -11,7 +11,9 @@ Future<Widget> buildJoinClass(BuildContext context) async {
   final mq = MediaQuery.of(context).size;
   return await showModalBottomSheet(
       isScrollControlled: true,
-      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(18)),
+      shape: const RoundedRectangleBorder(
+          borderRadius: BorderRadius.only(
+              topLeft: Radius.circular(18), topRight: Radius.circular(18))),
       context: context,
       builder: (ctx) => Container(
             height: mq.height * 0.8,
@@ -35,7 +37,7 @@ Future<Widget> buildJoinClass(BuildContext context) async {
 Widget buildAppBar(BuildContext context) {
   return AppBar(
     backgroundColor: Colors.white,
-    shape: RoundedRectangleBorder(
+    shape: const RoundedRectangleBorder(
         borderRadius: BorderRadius.only(
             topLeft: Radius.circular(15), topRight: Radius.circular(15))),
     centerTitle: true,

@@ -9,15 +9,15 @@ import '../widgets/drawer.dart';
 import '../widgets/assignment.dart';
 import '../widgets/about_class.dart';
 
-class ClassStreamScreen extends StatelessWidget{
-
+class ClassStreamScreen extends StatelessWidget {
   final String classId;
   final String className;
   final String section;
   final String subject;
   final bool isInstructor;
 
-  ClassStreamScreen(this.classId, this.className, this.section, this.subject,this.isInstructor);
+  ClassStreamScreen(this.classId, this.className, this.section, this.subject,
+      this.isInstructor);
 
   @override
   Widget build(BuildContext context) {
@@ -30,23 +30,25 @@ class ClassStreamScreen extends StatelessWidget{
         actions: [
           isInstructor
               ? IconButton(
-            icon: const Icon(
-              Icons.settings,
-              color: Colors.black54,
-            ),
-            onPressed: () {
-              buildEditClass(context,classId,className,section,subject);
-            },
-          )
+                  icon: const Icon(
+                    Icons.settings,
+                    color: Colors.black54,
+                  ),
+                  onPressed: () {
+                    buildEditClass(
+                        context, classId, className, section, subject);
+                  },
+                )
               : IconButton(
-            icon: const Icon(
-              Icons.info_outline,
-              color: Colors.black54,
-            ),
-            onPressed: () {
-              showAboutClassBottomSheet(context, className, section, subject);
-            },
-          ),
+                  icon: const Icon(
+                    Icons.info_outline,
+                    color: Colors.black54,
+                  ),
+                  onPressed: () {
+                    showAboutClassBottomSheet(
+                        context, className, section, subject);
+                  },
+                ),
         ],
       ),
       drawer: Drawer(
@@ -55,7 +57,7 @@ class ClassStreamScreen extends StatelessWidget{
       body: Column(
         mainAxisSize: MainAxisSize.min,
         children: [
-          buildClass(context,mq.height * 0.16, mq.width, classId,className,
+          buildClass(context, mq.height * 0.16, mq.width, classId, className,
               section, isInstructor),
           buildShareSomething(context, mq.height * 0.08),
           buildAssignmentStream(),
@@ -142,5 +144,4 @@ class ClassStreamScreen extends StatelessWidget{
       },
     );
   }
-
 }

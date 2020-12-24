@@ -6,22 +6,8 @@ import '../widgets/display_class.dart';
 import '../widgets/drawer.dart';
 import '../widgets/create_or_join_classroom.dart';
 
-class HomePage extends StatefulWidget {
-  @override
-  _HomePageState createState() => _HomePageState();
-}
-
-String imageUrl;
-
-class _HomePageState extends State<HomePage> {
-  @override
-  void initState() {
-    super.initState();
-    User user = FirebaseAuth.instance.currentUser;
-    setState(() {
-      imageUrl = user.photoURL;
-    });
-  }
+class HomePage extends StatelessWidget {
+  final User user = FirebaseAuth.instance.currentUser;
 
   @override
   Widget build(BuildContext context) {
@@ -42,7 +28,7 @@ class _HomePageState extends State<HomePage> {
             child: CircleAvatar(
               radius: 18,
               backgroundColor: Colors.grey,
-              backgroundImage: NetworkImage(imageUrl),
+              backgroundImage: NetworkImage(user.photoURL),
             ),
           ),
         ],
@@ -55,7 +41,9 @@ class _HomePageState extends State<HomePage> {
         backgroundColor: Colors.white,
         foregroundColor: Colors.blue,
         child: const Icon(Icons.add, size: 30),
-        onPressed: (){return buildBottomSheet(context);},
+        onPressed: () {
+          return buildBottomSheet(context);
+        },
       ),
     );
   }

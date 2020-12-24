@@ -3,6 +3,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:timeago/timeago.dart' as timeAgo;
 import 'package:url_launcher/url_launcher.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 
 import '../widgets/delete_assignment.dart';
 
@@ -28,6 +29,8 @@ class Assignment extends StatelessWidget {
       this.isInstructor,
       this.timestamp});
 
+  final User user = FirebaseAuth.instance.currentUser;
+
   @override
   Widget build(BuildContext context) {
     final mq = MediaQuery.of(context).size;
@@ -36,7 +39,7 @@ class Assignment extends StatelessWidget {
         if (await canLaunch(url)) {
           await launch(url);
         } else {
-          print('cannot open');
+          Fluttertoast.showToast(msg: 'Cannot open');
         }
       },
       child: Card(
@@ -47,13 +50,13 @@ class Assignment extends StatelessWidget {
           ),
           child: isInstructor
               ? buildAssignmentPostedByInstructor(mq.height * 0.1)
-              : buildAssignmentPostedByStudent(context,mq.height * 0.1)),
+              : buildAssignmentPostedByStudent(context, mq.height * 0.1)),
     );
   }
 
   Widget buildAssignmentPostedByInstructor(double height) {
     return Container(
-      padding: EdgeInsets.only(left: 10, right: 10, top: 20),
+      padding: const EdgeInsets.only(left: 10, right: 10, top: 20),
       height: height,
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(12),
@@ -66,7 +69,7 @@ class Assignment extends StatelessWidget {
             backgroundColor: Colors.green,
             backgroundImage: NetworkImage(photoUrl),
           ),
-          SizedBox(width: 10),
+          const SizedBox(width: 10),
           Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
@@ -75,11 +78,11 @@ class Assignment extends StatelessWidget {
                 child: Text(
                   'New Assignment Posted: $assignmentName',
                   overflow: TextOverflow.fade,
-                  style: TextStyle(fontWeight: FontWeight.bold),
+                  style: const TextStyle(fontWeight: FontWeight.bold),
                 ),
               ),
               Text(timeAgo.format(timestamp.toDate()),
-                  style: TextStyle(color: Colors.black87)),
+                  style: const TextStyle(color: Colors.black87)),
             ],
           ),
         ],
@@ -87,11 +90,9 @@ class Assignment extends StatelessWidget {
     );
   }
 
-  User user = FirebaseAuth.instance.currentUser;
-
-  Widget buildAssignmentPostedByStudent(BuildContext context,double height) {
+  Widget buildAssignmentPostedByStudent(BuildContext context, double height) {
     return Container(
-      padding: EdgeInsets.all(10),
+      padding: const EdgeInsets.all(10),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
@@ -105,38 +106,40 @@ class Assignment extends StatelessWidget {
                     backgroundColor: Colors.grey,
                     backgroundImage: NetworkImage(photoUrl),
                   ),
-                  SizedBox(width: 10),
+                  const SizedBox(width: 10),
                   Column(
                     mainAxisSize: MainAxisSize.min,
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(
                         studentName,
-                        style: TextStyle(
+                        style: const TextStyle(
                             fontWeight: FontWeight.w500, fontSize: 18),
                       ),
                       Text(
                         timeAgo.format(timestamp.toDate()),
-                        style: TextStyle(color: Colors.black87),
+                        style: const TextStyle(color: Colors.black87),
                       )
                     ],
                   ),
                 ],
               ),
-              user.uid == uid
-                  ? IconButton(
-                      icon: Icon(Icons.more_horiz),
-                      onPressed: () {showDeleteAssignmentBottomSheet(context, classId,assignmentId);},
-                    )
-                  : Container(),
+              if (user.uid == uid)
+                IconButton(
+                  icon: const Icon(Icons.more_horiz),
+                  onPressed: () {
+                    showDeleteAssignmentBottomSheet(
+                        context, classId, assignmentId);
+                  },
+                ),
             ],
           ),
-          SizedBox(height: 10),
+          const SizedBox(height: 10),
           Container(
             padding: EdgeInsets.only(left: 50),
             child: Text(
               assignmentName,
-              style: TextStyle(fontSize: 16),
+              style: const TextStyle(fontSize: 16),
             ),
           ),
         ],

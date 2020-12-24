@@ -49,12 +49,15 @@ Widget buildAppbar(BuildContext context, String uid, String classId,
     String studentName, String photoUrl, bool isInstructor) {
   return AppBar(
     backgroundColor: Colors.white,
-    shape: RoundedRectangleBorder(
+    shape: const RoundedRectangleBorder(
         borderRadius: BorderRadius.only(
             topLeft: Radius.circular(15), topRight: Radius.circular(15))),
     centerTitle: true,
     leading: IconButton(
-      icon: const Icon(Icons.clear,color: Colors.black,),
+      icon: const Icon(
+        Icons.clear,
+        color: Colors.black,
+      ),
       onPressed: () {
         Navigator.of(context).pop();
         postId = Uuid().v4();
@@ -62,7 +65,6 @@ Widget buildAppbar(BuildContext context, String uid, String classId,
         file = null;
       },
     ),
-
     actions: [
       FlatButton(
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(15)),

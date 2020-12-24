@@ -37,17 +37,17 @@ showUnEnrolAlert(BuildContext context, String classId) {
                 RoundedRectangleBorder(borderRadius: BorderRadius.circular(14)),
             title: const Text(
               'Unerol',
-              style: TextStyle(fontWeight: FontWeight.w500),
+              style: const TextStyle(fontWeight: FontWeight.w500),
             ),
             content: const Text(
               "By doing this, you'll no longer be able to see the class or participate in it.",
-              style: TextStyle(color: Colors.black87),
+              style: const TextStyle(color: Colors.black87),
             ),
             actions: [
               FlatButton(
                 child: const Text(
                   'CANCEL',
-                  style: TextStyle(fontWeight: FontWeight.w500),
+                  style: const TextStyle(fontWeight: FontWeight.w500),
                 ),
                 onPressed: () {
                   Navigator.of(context).pop();
@@ -56,7 +56,7 @@ showUnEnrolAlert(BuildContext context, String classId) {
               FlatButton(
                 child: const Text(
                   'UNENROL',
-                  style: TextStyle(fontWeight: FontWeight.w500),
+                  style: const TextStyle(fontWeight: FontWeight.w500),
                 ),
                 onPressed: () {
                   User user = FirebaseAuth.instance.currentUser;
