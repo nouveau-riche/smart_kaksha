@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_messaging/firebase_messaging.dart';
 
+import '../utility/push_notification.dart';
 import '../widgets/display_class.dart';
 import '../widgets/drawer.dart';
 import '../widgets/create_or_join_classroom.dart';
@@ -9,8 +11,13 @@ import '../widgets/create_or_join_classroom.dart';
 class HomePage extends StatelessWidget {
   final User user = FirebaseAuth.instance.currentUser;
 
+  static final FirebaseMessaging _firebaseMessaging = FirebaseMessaging();
+
   @override
   Widget build(BuildContext context) {
+    final pushNotificationService = PushNotificationService(_firebaseMessaging);
+    pushNotificationService.initialise();
+
     return Scaffold(
       backgroundColor: Colors.white,
       appBar: AppBar(
