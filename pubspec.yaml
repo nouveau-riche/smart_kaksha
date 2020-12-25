@@ -36,6 +36,7 @@ dependencies:
   share: ^0.6.5+4
   fluttertoast: ^7.1.1
   shimmer: ^1.1.2
+  dynamic_theme: ^1.0.0
 
 
   # The following adds the Cupertino Icons font to your application.

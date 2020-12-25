@@ -9,7 +9,7 @@ Future<Widget> showAboutClassBottomSheet(BuildContext context, String className,
       context: context,
       shape: const RoundedRectangleBorder(
           borderRadius: BorderRadius.only(
-              topRight: Radius.circular(10), topLeft: Radius.circular(10))),
+              topRight: Radius.circular(18), topLeft: Radius.circular(18))),
       builder: (ctx) => Container(
             height: mq.height * 0.8,
             child: Column(
@@ -17,9 +17,6 @@ Future<Widget> showAboutClassBottomSheet(BuildContext context, String className,
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 buildAppBar(context),
-                const Divider(
-                  color: Colors.black54,
-                ),
                 Container(
                   padding: const EdgeInsets.all(10),
                   child: Column(
@@ -68,23 +65,21 @@ Future<Widget> showAboutClassBottomSheet(BuildContext context, String className,
 }
 
 Widget buildAppBar(BuildContext context) {
-  return Container(
-    padding: const EdgeInsets.symmetric(horizontal: 10),
-    decoration: BoxDecoration(borderRadius: BorderRadius.circular(15)),
-    child: Row(
-      children: [
-        IconButton(
-          icon: const Icon(Icons.clear, color: Colors.black54),
-          onPressed: () {
-            Navigator.of(context).pop();
-          },
-        ),
-        SizedBox(width: 90),
-        const Text(
-          'About',
-          style: const TextStyle(color: Colors.black87),
-        ),
-      ],
+  return AppBar(
+    backgroundColor: Colors.white,
+    shape: const RoundedRectangleBorder(
+        borderRadius: BorderRadius.only(
+            topLeft: Radius.circular(15), topRight: Radius.circular(15))),
+    centerTitle: true,
+    title: const Text(
+      'About',
+      style: const TextStyle(color: Colors.black87),
+    ),
+    leading: IconButton(
+      icon: const Icon(Icons.clear, color: Colors.black54),
+      onPressed: () {
+        Navigator.of(context).pop();
+      },
     ),
   );
 }
