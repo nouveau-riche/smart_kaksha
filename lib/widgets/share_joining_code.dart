@@ -9,44 +9,41 @@ Future<Widget> showShareInvitationBottomSheet(
   return await showModalBottomSheet(
       context: context,
       builder: (ctx) => Container(
-            child: Expanded(
-              child: Column(
-                mainAxisSize: MainAxisSize.min,
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  const SizedBox(
-                    height: 5,
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                const SizedBox(
+                  height: 5,
+                ),
+                FlatButton.icon(
+                  icon: const Icon(Icons.share),
+                  label: const Text(
+                    'Share Invitation',
+                    style: const TextStyle(fontSize: 19),
                   ),
-                  FlatButton.icon(
-                    icon: Icon(Icons.share, color: Colors.blue),
-                    label: const Text(
-                      'Share Invitation',
-                      style: const TextStyle(fontSize: 19),
-                    ),
-                    onPressed: () {
-                      Share.share('Join the classroom using code: $classId');
-                      Navigator.of(context).pop();
-                    },
+                  onPressed: () {
+                    Share.share('Join the classroom using code: $classId');
+                    Navigator.of(context).pop();
+                  },
+                ),
+                FlatButton.icon(
+                  icon: const Icon(
+                    Icons.delete,
                   ),
-                  FlatButton.icon(
-                    icon: Icon(
-                      Icons.delete,
-                      color: Colors.redAccent,
-                    ),
-                    label: const Text(
-                      'Delete Class',
-                      style: const TextStyle(fontSize: 19),
-                    ),
-                    onPressed: () {
-                      Navigator.of(context).pop();
-                      showDeleteAlert(context, classId);
-                    },
+                  label: const Text(
+                    'Delete Class',
+                    style: const TextStyle(fontSize: 19),
                   ),
-                  const SizedBox(
-                    height: 14,
-                  ),
-                ],
-              ),
+                  onPressed: () {
+                    Navigator.of(context).pop();
+                    showDeleteAlert(context, classId);
+                  },
+                ),
+                const SizedBox(
+                  height: 14,
+                ),
+              ],
             ),
           ));
 }

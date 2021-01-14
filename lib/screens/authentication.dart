@@ -12,6 +12,7 @@ class Authentication extends StatelessWidget {
         children: [
           Container(
             height: mq.height * 0.36,
+            width: mq.width*0.5,
             child: Image.asset("assets/images/logo.jpg"),
           ),
           Container(
@@ -38,22 +39,14 @@ class Authentication extends StatelessWidget {
               )),
           Container(
             height: mq.height * 0.12,
-            child: Center(
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                mainAxisSize: MainAxisSize.min,
-                children: [
-                  Padding(
-                    padding: EdgeInsets.all(2),
-                    child: const Text(
-                      'Classroom helps classes communicate, save time and stay organised.',
-                      style: const TextStyle(
-                          fontSize: 16,
-                          color: Colors.white,
-                          fontWeight: FontWeight.w400),
-                    ),
-                  ),
-                ],
+            child: Padding(
+              padding: EdgeInsets.all(2),
+              child: const Text(
+                'Classroom helps classes communicate, save time and stay organised.',
+                style: const TextStyle(
+                    fontSize: 16,
+                    color: Colors.white,
+                    fontWeight: FontWeight.w400),
               ),
             ),
           ),
@@ -73,9 +66,7 @@ class Authentication extends StatelessWidget {
               color: Colors.white,
             ),
           ),
-          SizedBox(
-            height: mq.height * 0.25,
-          ),
+        Spacer(),
           Container(
             padding: EdgeInsets.all(2),
             height: mq.height * 0.1,

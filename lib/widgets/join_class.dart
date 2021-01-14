@@ -42,7 +42,7 @@ Widget buildAppBar(BuildContext context) {
             topLeft: Radius.circular(15), topRight: Radius.circular(15))),
     centerTitle: true,
     leading: IconButton(
-      icon: const Icon(Icons.clear),
+      icon: const Icon(Icons.clear,color: Colors.black87,),
       onPressed: () {
         Navigator.of(context).pop();
         Navigator.of(context).pop();
