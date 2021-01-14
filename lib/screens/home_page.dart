@@ -1,3 +1,4 @@
+import 'package:collage_classroom/agora/index.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -49,7 +50,8 @@ class HomePage extends StatelessWidget {
         foregroundColor: Colors.blue,
         child: const Icon(Icons.add, size: 30),
         onPressed: () {
-          return buildBottomSheet(context);
+          //return buildBottomSheet(context);
+          Navigator.of(context).push(MaterialPageRoute(builder: (ctx) => IndexPage()));
         },
       ),
     );
