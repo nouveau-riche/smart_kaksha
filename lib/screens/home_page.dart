@@ -1,4 +1,3 @@
-import 'package:collage_classroom/agora/index.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -12,12 +11,12 @@ import '../widgets/create_or_join_classroom.dart';
 class HomePage extends StatelessWidget {
   final User user = FirebaseAuth.instance.currentUser;
 
-  static final FirebaseMessaging _firebaseMessaging = FirebaseMessaging();
+  // static final FirebaseMessaging _firebaseMessaging = FirebaseMessaging();
 
   @override
   Widget build(BuildContext context) {
-    final pushNotificationService = PushNotificationService(_firebaseMessaging);
-    pushNotificationService.initialise();
+    // final pushNotificationService = PushNotificationService(_firebaseMessaging);
+    // pushNotificationService.initialise();
 
     return Scaffold(
       backgroundColor: Colors.white,
@@ -50,8 +49,8 @@ class HomePage extends StatelessWidget {
         foregroundColor: Colors.blue,
         child: const Icon(Icons.add, size: 30),
         onPressed: () {
-          //return buildBottomSheet(context);
-          Navigator.of(context).push(MaterialPageRoute(builder: (ctx) => IndexPage()));
+          return buildBottomSheet(context);
+          //Navigator.of(context).push(MaterialPageRoute(builder: (ctx) => IndexPage()));
         },
       ),
     );

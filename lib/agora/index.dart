@@ -2,7 +2,7 @@ import 'dart:async';
 
 import 'package:agora_rtc_engine/rtc_engine.dart';
 import 'package:flutter/material.dart';
-import 'package:permission_handler/permission_handler.dart';
+// import 'package:permission_handler/permission_handler.dart';
 
 import './call.dart';
 
@@ -114,8 +114,8 @@ class IndexState extends State<IndexPage> {
     });
     if (_channelController.text.isNotEmpty) {
       // await for camera and mic permissions before pushing video page
-      await _handleCameraAndMic(Permission.camera);
-      await _handleCameraAndMic(Permission.microphone);
+      // await _handleCameraAndMic(Permission.camera);
+      // await _handleCameraAndMic(Permission.microphone);
       // push video page with given channel name
       await Navigator.push(
         context,
@@ -129,8 +129,8 @@ class IndexState extends State<IndexPage> {
     }
   }
 
-  Future<void> _handleCameraAndMic(Permission permission) async {
-    final status = await permission.request();
-    print(status);
-  }
+  // Future<void> _handleCameraAndMic(Permission permission) async {
+  //   final status = await permission.request();
+  //   print(status);
+  // }
 }

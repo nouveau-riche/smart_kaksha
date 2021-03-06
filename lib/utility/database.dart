@@ -128,10 +128,12 @@ void updateAssignmentInClass(
 
 Future<String> uploadAssignmentOnFirebaseStorage(
     {String postId, File file}) async {
+  String downloadUrl;
   final ref = _firebaseStorage.ref().child('documents');
-  StorageUploadTask storageUploadTask = ref.child(postId).putFile(file);
-  StorageTaskSnapshot storageTaskSnapshot = await storageUploadTask.onComplete;
-  String downloadUrl = await storageTaskSnapshot.ref.getDownloadURL();
+  UploadTask uploadTask = ref.child(postId).putFile(file);
+  await uploadTask.whenComplete(() async {
+    downloadUrl = await uploadTask.snapshot.ref.getDownloadURL();
+  });
   return downloadUrl;
 }
 

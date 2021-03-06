@@ -60,6 +60,19 @@ Widget buildDrawerContent(BuildContext context) {
           },
         ),
       ),
+      Divider(),
+      Padding(
+        padding: const EdgeInsets.only(left: 8),
+        child: FlatButton.icon(
+          icon: const Icon(Icons.exit_to_app),
+          label: const Text('Logout'),
+          onPressed: () {
+            signOutGoogle();
+            Navigator.of(context).pushNamedAndRemoveUntil(
+                './authentication_screen', (route) => false);
+          },
+        ),
+      ),
     ],
   );
 }

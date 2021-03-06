@@ -41,7 +41,7 @@ Widget buildAppBar(BuildContext context, String classId) {
     leading: IconButton(
       icon: const Icon(
         Icons.clear,
-        color: Colors.black,
+        color: Colors.black54,
       ),
       onPressed: () {
         Navigator.of(context).pop();
@@ -49,7 +49,7 @@ Widget buildAppBar(BuildContext context, String classId) {
     ),
     title: const Text(
       'Edit class',
-      style: const TextStyle(fontSize: 18, color: Colors.black),
+      style: const TextStyle(fontSize: 18, color: Colors.black54),
     ),
     actions: [
       FlatButton(
