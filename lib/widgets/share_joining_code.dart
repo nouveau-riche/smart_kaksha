@@ -1,3 +1,4 @@
+import 'package:collage_classroom/constants.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 
@@ -16,24 +17,24 @@ Future<Widget> showShareInvitationBottomSheet(
                 const SizedBox(
                   height: 5,
                 ),
-                FlatButton.icon(
-                  icon: const Icon(Icons.share),
+                TextButton.icon(
+                  icon: const Icon(Icons.share,color: kPrimaryColor,),
                   label: const Text(
                     'Share Invitation',
-                    style: const TextStyle(fontSize: 19),
+                    style: const TextStyle(fontSize: 18,color: kTextColor),
                   ),
                   onPressed: () {
                     Share.share('Join the classroom using code: $classId');
                     Navigator.of(context).pop();
                   },
                 ),
-                FlatButton.icon(
+                TextButton.icon(
                   icon: const Icon(
-                    Icons.delete,
+                    Icons.delete,color: kPrimaryColor,
                   ),
                   label: const Text(
                     'Delete Class',
-                    style: const TextStyle(fontSize: 19),
+                    style: const TextStyle(fontSize: 18,color: kTextColor),
                   ),
                   onPressed: () {
                     Navigator.of(context).pop();
@@ -63,7 +64,7 @@ showDeleteAlert(BuildContext context, String classId) {
               style: const TextStyle(color: Colors.black87),
             ),
             actions: [
-              FlatButton(
+              TextButton(
                 child: const Text(
                   'CANCEL',
                   style: const TextStyle(fontWeight: FontWeight.w500),
@@ -72,7 +73,7 @@ showDeleteAlert(BuildContext context, String classId) {
                   Navigator.of(context).pop();
                 },
               ),
-              FlatButton(
+              TextButton(
                 child: const Text(
                   'DELETE',
                   style: const TextStyle(fontWeight: FontWeight.w500),

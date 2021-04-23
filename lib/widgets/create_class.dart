@@ -1,3 +1,4 @@
+import 'package:collage_classroom/constants.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 
@@ -54,10 +55,10 @@ Widget buildAppBar(BuildContext context) {
       style: const TextStyle(fontSize: 18, color: Colors.black),
     ),
     actions: [
-      FlatButton(
+      TextButton(
         child: const Text(
           'Create',
-          style: const TextStyle(fontSize: 16),
+          style: const TextStyle(fontSize: 16,color: kPrimaryColor),
         ),
         onPressed: isSubjectNameValid == false ||
                 isClassNameValid == false ||
@@ -98,7 +99,6 @@ Widget buildClassNameField(double width) {
           borderSide: const BorderSide(width: 2, color: Colors.blue),
         ),
       ),
-      autofocus: true,
       controller: _className,
       onChanged: (_value) {
         if (_value.length > 0) {
@@ -146,7 +146,6 @@ Widget buildSubjectNameField(double width) {
           borderSide: const BorderSide(width: 2, color: Colors.blue),
         ),
       ),
-      autofocus: true,
       controller: _subjectName,
       onChanged: (_value) {
         if (_value.length > 0) {

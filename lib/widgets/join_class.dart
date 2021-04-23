@@ -1,4 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:collage_classroom/constants.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 
@@ -39,7 +40,7 @@ Widget buildAppBar(BuildContext context) {
     backgroundColor: Colors.white,
     shape: const RoundedRectangleBorder(
         borderRadius: BorderRadius.only(
-            topLeft: Radius.circular(15), topRight: Radius.circular(15))),
+            topLeft: Radius.circular(15), topRight: Radius.circular(15)),),
     centerTitle: true,
     leading: IconButton(
       icon: const Icon(Icons.clear,color: Colors.black87,),
@@ -53,10 +54,10 @@ Widget buildAppBar(BuildContext context) {
       style: const TextStyle(fontSize: 18, color: Colors.black),
     ),
     actions: [
-      FlatButton(
+      TextButton(
         child: const Text(
           'Join',
-          style: const TextStyle(fontSize: 16),
+          style: const TextStyle(fontSize: 16,color: kPrimaryColor),
         ),
         onPressed: isClassCodeValid == false
             ? null

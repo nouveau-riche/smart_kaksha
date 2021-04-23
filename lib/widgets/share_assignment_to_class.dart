@@ -1,4 +1,5 @@
 import 'dart:io';
+import 'package:collage_classroom/constants.dart';
 import 'package:flutter/material.dart';
 import 'package:file_picker/file_picker.dart';
 import 'package:uuid/uuid.dart';
@@ -106,7 +107,7 @@ class _BottomSheetContentState extends State<BottomSheetContent> {
             width: 58,
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(3.5),
-              color: Colors.green,
+              color: kPrimaryColor,
             ),
             child: Center(
               child: const Text(
@@ -148,17 +149,18 @@ class _BottomSheetContentState extends State<BottomSheetContent> {
       children: [
         result != null
             ? Text(result.files.single.path)
-            : FlatButton.icon(
+            : TextButton.icon(
+
                 label: fileName == null
                     ? const Text(
-                        'Add attachment',
-                        style: const TextStyle(color: Colors.black87),
+                        '  Add attachment',
+                        style: const TextStyle(color: Colors.black87,fontWeight: FontWeight.w500,fontSize: 15),
                       )
                     : Text(
                         fileName,
                         style: const TextStyle(color: Colors.black87),
                       ),
-                icon: const Icon(Icons.attachment),
+                icon: const Icon(Icons.attachment,color: Colors.black,),
                 onPressed: () async {
                   result = await FilePicker.platform.pickFiles();
                   if (result != null) {

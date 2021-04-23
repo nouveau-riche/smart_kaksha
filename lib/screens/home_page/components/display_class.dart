@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 
-import '../screens/class_detail.dart';
-import '../widgets/unenrol_joined_class.dart';
-import '../widgets/share_joining_code.dart';
-import '../widgets/slide_transition.dart';
+import '../../class_detail/class_detail.dart';
+import '../../../widgets/unenrol_joined_class.dart';
+import '../../../widgets/share_joining_code.dart';
+import '../../../widgets/slide_transition.dart';
 
 class DisplayClass extends StatelessWidget {
   final String classId;

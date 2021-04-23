@@ -1,3 +1,4 @@
+import 'package:collage_classroom/constants.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 
@@ -14,10 +15,10 @@ Future<Widget> showUnEnrolBottomSheet(
               mainAxisSize: MainAxisSize.min,
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                FlatButton(
+                TextButton(
                   child: const Text(
                     'Unenroll',
-                    style: const TextStyle(fontSize: 19),
+                    style: const TextStyle(fontSize: 19,color: kTextColor),
                   ),
                   onPressed: () {
                     Navigator.of(context).pop();
@@ -36,7 +37,7 @@ showUnEnrolAlert(BuildContext context, String classId) {
             shape:
                 RoundedRectangleBorder(borderRadius: BorderRadius.circular(14)),
             title: const Text(
-              'Unerol',
+              'Unenroll',
               style: const TextStyle(fontWeight: FontWeight.w500),
             ),
             content: const Text(
@@ -44,7 +45,7 @@ showUnEnrolAlert(BuildContext context, String classId) {
               style: const TextStyle(color: Colors.black87),
             ),
             actions: [
-              FlatButton(
+              TextButton(
                 child: const Text(
                   'CANCEL',
                   style: const TextStyle(fontWeight: FontWeight.w500),
@@ -53,10 +54,10 @@ showUnEnrolAlert(BuildContext context, String classId) {
                   Navigator.of(context).pop();
                 },
               ),
-              FlatButton(
+              TextButton(
                 child: const Text(
                   'UNENROL',
-                  style: const TextStyle(fontWeight: FontWeight.w500),
+                  style: const TextStyle(fontWeight: FontWeight.w500,color: kPrimaryColor),
                 ),
                 onPressed: () {
                   User user = FirebaseAuth.instance.currentUser;

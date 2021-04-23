@@ -13,7 +13,7 @@ Future<Widget> showDeleteAssignmentBottomSheet(
               mainAxisSize: MainAxisSize.min,
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                FlatButton(
+                TextButton(
                   child: const Text(
                     'Delete Assignment',
                     style: const TextStyle(fontSize: 19),
@@ -43,7 +43,7 @@ showDeleteAlert(BuildContext context, String classId, String assignmentId) {
               style: const TextStyle(color: Colors.black87),
             ),
             actions: [
-              FlatButton(
+              TextButton(
                 child: const Text(
                   'CANCEL',
                   style: const TextStyle(fontWeight: FontWeight.w500),
@@ -52,7 +52,7 @@ showDeleteAlert(BuildContext context, String classId, String assignmentId) {
                   Navigator.of(context).pop();
                 },
               ),
-              FlatButton(
+              TextButton(
                 child: const Text(
                   'DELETE',
                   style: const TextStyle(

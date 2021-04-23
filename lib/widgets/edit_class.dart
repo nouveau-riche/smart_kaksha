@@ -17,7 +17,10 @@ Future<Widget> buildEditClass(BuildContext context, String classId,
   return await showModalBottomSheet(
       isScrollControlled: true,
       context: context,
-      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(18)),
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.only(
+            topLeft: Radius.circular(18), topRight: Radius.circular(18)),
+      ),
       builder: (ctx) => Container(
             height: mq.height * 0.8,
             child: Column(
@@ -52,7 +55,7 @@ Widget buildAppBar(BuildContext context, String classId) {
       style: const TextStyle(fontSize: 18, color: Colors.black54),
     ),
     actions: [
-      FlatButton(
+      TextButton(
         child: const Text(
           'Edit',
           style: const TextStyle(fontSize: 16),

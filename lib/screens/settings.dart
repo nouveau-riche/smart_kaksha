@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import '../widgets/drawer.dart';
+import 'home_page/components/drawer.dart';
 
 class Settings extends StatelessWidget {
   @override
@@ -17,7 +17,7 @@ class Settings extends StatelessWidget {
         elevation: 0,
       ),
       drawer: Drawer(
-        child: buildDrawerContent(context),
+        child: BuildDrawer(),
       ),
       body: Column(
         mainAxisAlignment: MainAxisAlignment.center,

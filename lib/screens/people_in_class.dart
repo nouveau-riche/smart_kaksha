@@ -1,7 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 
-import '../widgets/drawer.dart';
+import 'home_page/components/drawer.dart';
 
 class PeopleInClass extends StatelessWidget {
   final String classId;
@@ -22,7 +22,7 @@ class PeopleInClass extends StatelessWidget {
         ),
       ),
       drawer: Drawer(
-        child: buildDrawerContent(context),
+        child: BuildDrawer(),
       ),
       body: StreamBuilder(
           stream: FirebaseFirestore.instance

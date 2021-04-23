@@ -15,7 +15,7 @@ publish_to: 'none' # Remove this line if you wish to publish to pub.dev
 # In iOS, build-name is used as CFBundleShortVersionString while build-number used as CFBundleVersion.
 # Read more about iOS versioning at
 # https://developer.apple.com/library/archive/documentation/General/Reference/InfoPlistKeyReference/Articles/CoreFoundationKeys.html
-version: 1.0.0+1
+version: 1.1.0+1
 
 environment:
   sdk: ">=2.7.0 <3.0.0"
@@ -39,6 +39,7 @@ dependencies:
   shimmer: ^1.1.2
   firebase_messaging: ^9.0.0
   velocity_x: ^2.6.1
+  mailer: ^5.0.0
 
 
   # The following adds the Cupertino Icons font to your application.
@@ -62,12 +63,15 @@ flutter:
 
   # To add assets to your application, add an assets section, like this:
   assets:
-    - assets/images/logo.jpg
     - assets/images/instructor.jpeg
     - assets/images/joined.jpeg
     - assets/images/blinking-arrow.gif
     - assets/images/no-class.png
     - assets/images/project.png
+    - assets/images/google.jpg
+    - assets/images/exam.png
+    - assets/images/teacher.png
+    - assets/images/study.png
   #   - images/a_dot_ham.jpeg
 
   # An image asset can refer to one or more resolution-specific "variants", see

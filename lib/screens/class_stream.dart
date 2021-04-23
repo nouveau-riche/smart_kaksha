@@ -1,11 +1,11 @@
-import 'package:collage_classroom/widgets/edit_class.dart';
 import 'package:flutter/material.dart';
+import 'package:collage_classroom/widgets/edit_class.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:collage_classroom/widgets/share_assignment_to_class.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 
-import '../widgets/display_class.dart';
-import '../widgets/drawer.dart';
+import 'home_page/components/display_class.dart';
+import 'home_page/components/drawer.dart';
 import '../widgets/assignment.dart';
 import '../widgets/about_class.dart';
 
@@ -52,7 +52,7 @@ class ClassStreamScreen extends StatelessWidget {
         ],
       ),
       drawer: Drawer(
-        child: buildDrawerContent(context),
+        child: BuildDrawer(),
       ),
       body: Column(
         mainAxisSize: MainAxisSize.min,

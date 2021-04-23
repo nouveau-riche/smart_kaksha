@@ -1,13 +1,13 @@
-import 'package:collage_classroom/screens/splash/splash_screen.dart';
-import 'package:firebase_auth/firebase_auth.dart';
+import 'package:collage_classroom/routes.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
-import 'package:firebase_core/firebase_core.dart';
 import 'package:vxstate/vxstate.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_core/firebase_core.dart';
+import 'package:flutter/services.dart';
 
-import './screens/authentication.dart';
-import './screens/home_page.dart';
 import '././vx_store.dart';
+import './screens/home_page/home_page.dart';
+import './screens/./splash/splash_screen.dart';
 
 void main() async {
   SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
@@ -15,7 +15,12 @@ void main() async {
   ));
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
-  runApp(VxState(store: MyStore(),child: MyApp()));
+  runApp(
+    VxState(
+      store: MyStore(),
+      child: MyApp(),
+    ),
+  );
 }
 
 class MyApp extends StatelessWidget {
@@ -26,10 +31,7 @@ class MyApp extends StatelessWidget {
           ? HomePage()
           : SplashScreen(),
       debugShowCheckedModeBanner: false,
-      routes: {
-        './authentication_screen': (ctx) => Authentication(),
-        '/home-page': (ctx) => HomePage(),
-      },
+      routes: routes,
     );
   }
 }

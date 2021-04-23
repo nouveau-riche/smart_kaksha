@@ -1,3 +1,4 @@
+import 'package:collage_classroom/constants.dart';
 import 'package:flutter/material.dart';
 
 Future<Widget> showAboutClassBottomSheet(BuildContext context, String className,
@@ -27,7 +28,7 @@ Future<Widget> showAboutClassBottomSheet(BuildContext context, String className,
                         style: const TextStyle(
                             fontSize: 30,
                             fontWeight: FontWeight.bold,
-                            color: Colors.blue),
+                            color: kPrimaryColor),
                       ),
                       const SizedBox(height: 5),
                       Text(

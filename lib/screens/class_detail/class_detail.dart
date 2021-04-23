@@ -1,7 +1,8 @@
+import 'package:collage_classroom/constants.dart';
 import 'package:flutter/material.dart';
 
-import '../screens/people_in_class.dart';
-import '../screens/class_stream.dart';
+import '../people_in_class.dart';
+import '../class_stream.dart';
 
 class ClassDetail extends StatefulWidget {
   final String classId;
@@ -10,7 +11,8 @@ class ClassDetail extends StatefulWidget {
   final String subject;
   final bool isInstructor;
 
-  ClassDetail(this.classId, this.className, this.section, this.subject,this.isInstructor);
+  ClassDetail(this.classId, this.className, this.section, this.subject,
+      this.isInstructor);
 
   @override
   _ClassDetailState createState() => _ClassDetailState();
@@ -57,8 +59,8 @@ class _ClassDetailState extends State<ClassDetail> {
           PageView(
             children: [
               ClassStreamScreen(widget.classId, widget.className,
-                  widget.section, widget.subject,widget.isInstructor),
-              PeopleInClass(widget.classId,widget.className)
+                  widget.section, widget.subject, widget.isInstructor),
+              PeopleInClass(widget.classId, widget.className)
             ],
             controller: _controller,
             onPageChanged: whenPageChanges,
@@ -68,14 +70,13 @@ class _ClassDetailState extends State<ClassDetail> {
       bottomNavigationBar: BottomNavigationBar(
         currentIndex: pageIndex,
         onTap: onTapChangePage,
+        selectedItemColor: kPrimaryColor,
         items: [
           const BottomNavigationBarItem(
-            icon: const Icon(Icons.assignment),
-            title: const Text('Stream')
-          ),
+              icon: const Icon(Icons.assignment), label: 'Stream'),
           const BottomNavigationBarItem(
             icon: const Icon(Icons.people),
-            title: const Text('People'),
+            label: 'People',
           ),
         ],
       ),

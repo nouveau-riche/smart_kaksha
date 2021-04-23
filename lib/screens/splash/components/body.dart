@@ -1,14 +1,11 @@
 import 'package:flutter/material.dart';
-// import 'package:shop_app/constants.dart';
-// import 'package:shop_app/screens/sign_in/sign_in_screen.dart';
 import 'package:velocity_x/velocity_x.dart';
 
-// This is the best practice
+import '../../../vx_store.dart';
+import '../../../constants.dart';
 import '../../../size_config.dart';
 import '../components/splash_content.dart';
-// import '../../../components/default_button.dart';
-import '../../../vx_store.dart';
-
+import '../../../utility/google_signin.dart';
 
 class Body extends StatefulWidget {
   @override
@@ -16,25 +13,24 @@ class Body extends StatefulWidget {
 }
 
 class _BodyState extends State<Body> {
-
   MyStore store = VxState.store;
 
   int currentPage = 0;
   List<Map<String, String>> splashData = [
     {
       "text": "Welcome to Smart Kaksha, Let’s study!",
-      "image": "assets/images/"
+      "image": "assets/images/exam.png"
     },
     {
-      "text":
-          "We help students to conect with teacher \naround the India",
-      "image": "assets/images/"
+      "text": "We help students to connect with their teachers",
+      "image": "assets/images/teacher.png"
     },
     {
       "text": "We show the easy way to study. \nJust stay at home with us",
-      "image": "assets/images/"
+      "image": "assets/images/study.png"
     },
   ];
+
   @override
   Widget build(BuildContext context) {
     return SafeArea(
@@ -46,9 +42,6 @@ class _BodyState extends State<Body> {
               flex: 3,
               child: PageView.builder(
                 onPageChanged: (value) {
-                  // setState(() {
-                  //   currentPage = value;
-                  // });
                   IncrementPage(value);
                 },
                 itemCount: splashData.length,
@@ -62,15 +55,14 @@ class _BodyState extends State<Body> {
               flex: 2,
               child: Padding(
                 padding: EdgeInsets.symmetric(
-                    horizontal: getProportionateScreenWidth(20),
-
+                  horizontal: getProportionateScreenWidth(20),
                 ),
                 child: Column(
                   children: <Widget>[
-                    Spacer(),
+                    const Spacer(),
                     VxBuilder(
                       mutations: {IncrementPage},
-                      builder: (_,status) => Row(
+                      builder: (_, status) => Row(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: List.generate(
                           splashData.length,
@@ -78,15 +70,9 @@ class _BodyState extends State<Body> {
                         ),
                       ),
                     ),
-                    Spacer(flex: 3),
-                    ElevatedButton(onPressed: (){}, child: Text('Continue'),),
-                    // DefaultButton(
-                    //   text: "Continue",
-                    //   press: () {
-                    //     Navigator.pushNamed(context, SignInScreen.routeName);
-                    //   },
-                    // ),
-                    Spacer(),
+                    const Spacer(flex: 3),
+                    buildSignInButton(),
+                    const Spacer(),
                   ],
                 ),
               ),
@@ -97,9 +83,32 @@ class _BodyState extends State<Body> {
     );
   }
 
+  ElevatedButton buildSignInButton() {
+    return ElevatedButton(
+      child: Row(
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          Container(
+            height: 25,
+            child: Image.asset('assets/images/google.jpg'),
+          ),
+          const SizedBox(
+            width: 10,
+          ),
+          const Text('Sign in with Google'),
+        ],
+      ),
+      style: ElevatedButton.styleFrom(
+          primary: kPrimaryColor, elevation: 2, padding: const EdgeInsets.all(5)),
+      onPressed: () {
+        signInWithGoogle(context).whenComplete(() {
+          print('done successfully');
+        });
+      },
+    );
+  }
+
   AnimatedContainer buildDot({int index}) {
-    const kPrimaryColor = Color(0xFFFF7643);
-    const kAnimationDuration = Duration(milliseconds: 200);
     return AnimatedContainer(
       duration: kAnimationDuration,
       margin: EdgeInsets.only(right: 5),
