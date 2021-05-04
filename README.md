@@ -1,4 +1,4 @@
-# collage_classroom
+# Smart Kaksha
 
 A new Flutter application.
 
