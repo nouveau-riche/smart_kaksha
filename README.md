@@ -1,18 +1,18 @@
-Welcome to the smart kaksha wiki!
+Welcome to the smart kaksha!
 
 # **Smart Kaksha**
 
 
-Building a Mobile application(Android and iOS) for collages that aims to simplify creating, distributing and grading assignments. The primary purpose of Collage Classroom is to streamline the process of sharing files and notes between teachers and students.
+Building a Mobile application(Android and iOS) for schoold that aims to simplify creating, distributing and grading assignments. The primary purpose of Smart Kaksha is to streamline the process of sharing files and notes between teachers and students.
 
 ## Smart Kaksha Features:
 
 * Splash
-* Login
-* Routing
+* Signup/Login with Google
 * Create Classroom
 * Join Classroom
 * Edit Classroom by Instructor
+* Share joining code 
 * Classroom Details for Students
 * Post Assignment by Instructor
 * Unenrol From Joined Class
