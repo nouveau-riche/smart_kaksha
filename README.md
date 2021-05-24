@@ -1,16 +1,29 @@
-# Smart Kaksha
+Welcome to the smart kaksha wiki!
 
-A new Flutter application.
+# **Smart Kaksha**
 
-## Getting Started
 
-This project is a starting point for a Flutter application.
+Building a Mobile application(Android and iOS) for collages that aims to simplify creating, distributing and grading assignments. The primary purpose of Collage Classroom is to streamline the process of sharing files and notes between teachers and students.
 
-A few resources to get you started if this is your first Flutter project:
+## Smart Kaksha Features:
 
-- [Lab: Write your first Flutter app](https://flutter.dev/docs/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://flutter.dev/docs/cookbook)
+* Splash
+* Login
+* Routing
+* Create Classroom
+* Join Classroom
+* Edit Classroom by Instructor
+* Classroom Details for Students
+* Post Assignment by Instructor
+* Unenrol From Joined Class
+* Share Invitation Code
+* Submit Assignment
+* Delete Submitted Assignment
+* See Classroom Stream
+* See Students Joined 
 
-For help getting started with Flutter, view our
-[online documentation](https://flutter.dev/docs), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+## Upcoming Features:
+
+* Change Profile Picture
+* Send Notification on assignment uploaded by Instructor
+* Create room with Instructor and students.
