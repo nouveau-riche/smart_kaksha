@@ -27,3 +27,6 @@ Building a Mobile application(Android and iOS) for schoold that aims to simplify
 * Change Profile Picture
 * Send Notification on assignment uploaded by Instructor
 * Create room with Instructor and students.
+
+
+	<a href="https://play.google.com/store/apps/details?id=com.smart_kaksha"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/7/78/Google_Play_Store_badge_EN.svg/640px-Google_Play_Store_badge_EN.svg.png" alt="Play Store"/></a>
